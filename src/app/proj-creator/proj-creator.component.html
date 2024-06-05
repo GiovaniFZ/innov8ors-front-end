@@ -47,17 +47,13 @@
             <mat-label>Email Orientador</mat-label>
             <input matInput [(ngModel)]="emailAdv">
         </mat-form-field>
-        <mat-form-field>
-            <mat-label>Status</mat-label>
-            <input matInput>
-        </mat-form-field>
         <button mat-raised-button color="fetincolor" (click)="saveProject()">Salvar</button>
         <div class="endPage">
         <button mat-raised-button color="fetincolor" (click)="goBack()">Voltar</button>
         </div>
         <div class="endPage">
         <p class="textInfo" *ngIf="attempt">Projeto criado com sucesso!</p>
-        <p class="textInfo" *ngIf="not_created">Erro ao criar o usuário</p>
+        <p class="textInfo" *ngIf="not_created">Erro ao criar o projeto!</p>
         <mat-progress-spinner
         *ngIf="loading"
           [color]="color"

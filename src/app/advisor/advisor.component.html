@@ -20,17 +20,17 @@
       </mat-expansion-panel>
 
       <p id="titulo-times">Times orientados</p>
-        <mat-expansion-panel *ngFor="let team of teams; let i = index" (opened)="panelOpened()" (closed)="panelOpenState = false">
+        <mat-expansion-panel *ngFor="let team of teams; let i = index" class="expansion1">
           <mat-expansion-panel-header>
             <mat-panel-title>
               Time {{i+1}}
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <p>ID: {{id}}</p>
-          <p>Nome: {{name}}</p>
-          <p>Ativo: {{status}}</p>
-          <p>Orientador: {{advisorName}}</p>
+          <p>ID: {{ id[i] }}</p>
+          <p>Nome: {{ name[i] }}</p>
+          <p>Ativo: {{ status[i] }}</p>
+          <p>Orientador: {{ advisorName[i] }}</p>
           <button mat-raised-button color="fetincolor" (click)="seeDetails(i)">Mais detalhes</button>
         </mat-expansion-panel>
         
