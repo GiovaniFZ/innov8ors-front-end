@@ -91,6 +91,17 @@ export class UsersDataService {
       }, json);
   }
 
+  handlePut(bearer:String, endPoint:String, json:any){
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${bearer}`
+    });
+    return this.http.put<any>(
+      this.urlBase + endPoint,
+      { 
+        headers: headers 
+      }, json);
+  }
+
   // Configurações de array
   setTeams(data: any[]){
     this.dataArray = data;

@@ -23,7 +23,7 @@ const routes: Routes = [
     { path: 'help-page', component:HelpPageComponent },
     { path: 'proj-details/:i', component:ProjDetailsComponent },
     { path: 'adm-fetinStages', component:AdmFetinStagesComponent },
-    { path:'adm-updater', component:AdmUpdaterComponent }
+    { path:'adm-updater/:bearer', component:AdmUpdaterComponent }
 ];
 
 @NgModule({

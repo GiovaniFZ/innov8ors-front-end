@@ -32,40 +32,38 @@ export class ProjCreatorComponent {
   constructor(private userDataService: UsersDataService, private router: ActivatedRoute, private location: Location) {}
   bearer = String(this.router.snapshot.paramMap.get('bearer'));
 
-  jsonProj ={
-    "teamName": this.tituloProj,
-    "members": [
-      {
-        "name": this.membro1,
-        "email": this.email1
-      },
-      {
-        "name": this.membro2,
-        "email": this.membro3
-      },
-      {
-        "name": this.membro3,
-        "email": this.email3
-      },
-      {
-        "name": this.membro4,
-        "email": this.email4
-      }
-    ],
-    "advisor": {
-      "name": this.advisorName,
-      "email": this.emailAdv
-    }
-  }
-
   saveProject(){
+    let jsonProj ={
+      "teamName": this.tituloProj,
+      "members": [
+        {
+          "name": this.membro1,
+          "email": this.email1
+        },
+        {
+          "name": this.membro2,
+          "email": this.membro3
+        },
+        {
+          "name": this.membro3,
+          "email": this.email3
+        },
+        {
+          "name": this.membro4,
+          "email": this.email4
+        }
+      ],
+      "advisor": {
+        "name": this.advisorName,
+        "email": this.emailAdv
+      }
+    }
     this.loading = true;
-    console.log('caiu na função')
-    this.userDataService.tryCreate(this.jsonProj, this.bearer).subscribe(
+    this.userDataService.tryCreate(jsonProj, this.bearer).subscribe(
       (response: HttpResponse<any>) =>{
         console.log('Response: ', response);
       },
-      (error) => { // Por algum motivo, o Angular trata Status 201 como erro
+      (error) => { // Angular trata Status 201 como erro
         if(error.status === 201){
           this.attempt = true;
         }else{ // Projeto não criado

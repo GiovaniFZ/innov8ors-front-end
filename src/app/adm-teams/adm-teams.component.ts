@@ -45,13 +45,11 @@ export class AdmComponent {
     arr = Object.entries(this.teams);
     arr2 = arr[0][1];
     this.teams_names = Object.values(arr2);
-    console.log(this.teams_names);
     return this.teams_names;
   }
 
   updateData(){
     this.loading = true;
-    console.log(this.idTeam);
     this.userDataService.handleGet(this.bearer, '/adm/teams/' + this.idTeam).subscribe(
       (response) => {    
         this.userDataService.setTeamsDetails(response);

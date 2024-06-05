@@ -70,7 +70,7 @@ export class UpdaterComponent {
   }
 
   edit(){
-    this.route.navigate(['/adm-updater']);
+    this.route.navigate(['/adm-updater', this.bearer]);
   }
 
   addMember(){

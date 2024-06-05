@@ -22,26 +22,16 @@
                 Atualizar orientador
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>ID do orientador antigo: </p>
+        <p>ID do orientador antigo: {{ advisorId }}</p>
         <mat-form-field>
-            <mat-label>Novo ID: </mat-label>
-            <input matInput [(ngModel)]="newName" type="text">
+            <mat-label>Nome do novo </mat-label>
+            <input matInput [(ngModel)]="newAdvName" type="text">
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="submitNewName()">Submeter</button>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel class="expansion2">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Atualizar fase
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>Fase atual: </p>
         <mat-form-field>
-            <mat-label>Nova fase: </mat-label>
-            <input matInput [(ngModel)]="newName" type="text">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="submitNewName()">Submeter</button>
+        <mat-label>Email do novo </mat-label>
+        <input matInput [(ngModel)]="newAdvEmail" type="text">
+    </mat-form-field>
+        <button mat-raised-button color="primary" (click)="submitNewAdv()">Submeter</button>
     </mat-expansion-panel>
 
     <mat-expansion-panel class="expansion2">
@@ -50,11 +40,6 @@
                 Atualizar status
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>Nome antigo: </p>
-        <mat-form-field>
-            <mat-label>Terá um switch aqui</mat-label>
-            <input matInput [(ngModel)]="newName" type="text">
-        </mat-form-field>
         <button mat-raised-button color="primary" (click)="submitNewName()">Submeter</button>
     </mat-expansion-panel>
 </div>
