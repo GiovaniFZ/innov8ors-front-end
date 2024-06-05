@@ -1,0 +1,64 @@
+<body>
+    <div class="titulo">Editar dados do projeto
+    </div>
+    <div class="expansion">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Atualizar nome
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>Nome antigo: {{ name }} </p>
+        <mat-form-field>
+            <mat-label>Novo nome</mat-label>
+            <input matInput [(ngModel)]="newName" type="text">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="submitNewName()">Submeter</button>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="expansion2">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Atualizar orientador
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>ID do orientador antigo: </p>
+        <mat-form-field>
+            <mat-label>Novo ID: </mat-label>
+            <input matInput [(ngModel)]="newName" type="text">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="submitNewName()">Submeter</button>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="expansion2">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Atualizar fase
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>Fase atual: </p>
+        <mat-form-field>
+            <mat-label>Nova fase: </mat-label>
+            <input matInput [(ngModel)]="newName" type="text">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="submitNewName()">Submeter</button>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="expansion2">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Atualizar status
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>Nome antigo: </p>
+        <mat-form-field>
+            <mat-label>Terá um switch aqui</mat-label>
+            <input matInput [(ngModel)]="newName" type="text">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="submitNewName()">Submeter</button>
+    </mat-expansion-panel>
+</div>
+<div class="but">
+<button mat-raised-button>Voltar</button>
+</div>
+</body>

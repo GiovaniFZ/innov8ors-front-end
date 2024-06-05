@@ -1,8 +1,9 @@
 <body>
     <div id="Fundo">
-        <p id="ID">Detalhes do Projeto</p>
+            <button mat-button (click)="edit()">
+                <mat-icon>edit</mat-icon>
+              </button>
         <p id="Titulo">{{ name }}</p>
-
         <div id="ID">
             <p>ID: {{ id }}</p>
         </div>
@@ -82,9 +83,9 @@
                 </mat-expansion-panel-header>
                 <mat-form-field>
                     <mat-label>Nome do membro</mat-label>
-                    <input matInput [(ngModel)]="removedMember" type="text" (click)="deleteMember()">
+                    <input matInput [(ngModel)]="removedMember" type="text">
                 </mat-form-field>
-                <button mat-raised-button color="primary">Submeter</button>
+                <button mat-raised-button color="primary" (click)="deleteMember()">Submeter</button>
             </mat-expansion-panel>
 
         </mat-accordion>

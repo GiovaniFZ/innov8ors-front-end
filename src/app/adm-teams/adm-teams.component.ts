@@ -54,7 +54,6 @@ export class AdmComponent {
     console.log(this.idTeam);
     this.userDataService.handleGet(this.bearer, '/adm/teams/' + this.idTeam).subscribe(
       (response) => {    
-        console.log(response);
         this.userDataService.setTeamsDetails(response);
         this.router.navigate(['/updater', this.bearer]);
       },

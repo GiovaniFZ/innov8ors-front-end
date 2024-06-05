@@ -10,6 +10,7 @@ import { IntermScreenComponent } from './interm-screen/interm-screen.component';
 import { HelpPageComponent } from './help-page/help-page.component';
 import { ProjDetailsComponent } from './proj-details/proj-details.component';
 import { AdmFetinStagesComponent } from './adm-fetin-stages/adm-fetin-stages.component';
+import { AdmUpdaterComponent } from './adm-updater/adm-updater.component';
 
 const routes: Routes = [    
     { path: 'auth', component: AuthComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
     { path: 'interm-screen/:bearer/:name/:role', component:IntermScreenComponent },
     { path: 'help-page', component:HelpPageComponent },
     { path: 'proj-details/:i', component:ProjDetailsComponent },
-    { path: 'adm-fetinStages', component:AdmFetinStagesComponent }
+    { path: 'adm-fetinStages', component:AdmFetinStagesComponent },
+    { path:'adm-updater', component:AdmUpdaterComponent }
 ];
 
 @NgModule({

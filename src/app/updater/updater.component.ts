@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location, CommonModule } from '@angular/common';
 import { UsersDataService } from '../services/users-data.service';
 import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-updater',
@@ -16,12 +17,13 @@ import { MatInput } from '@angular/material/input';
     MatFormFieldModule,MatButton,
     CommonModule, 
     FormsModule,
-    MatInput],
+    MatInput,
+    MatIconModule],
   templateUrl: './updater.component.html',
   styleUrl: './updater.component.css'
 })
 export class UpdaterComponent {
-  constructor(private route: ActivatedRoute, private location: Location, private userDataService: UsersDataService) { }
+  constructor(private router: ActivatedRoute, private location: Location, private userDataService: UsersDataService, private route: Router) { }
   panelOpenState: boolean = false;
   id = '';
   json:any;
@@ -39,7 +41,9 @@ export class UpdaterComponent {
   phaseId = '';
   newGrade = '';
   removedMember = '';
-  bearer = String(this.route.snapshot.paramMap.get('bearer'));
+  bearer = String(this.router.snapshot.paramMap.get('bearer'));
+  newTitle:string = '';
+  isEditing: boolean = false;
 
 
   ngOnInit(){
@@ -59,11 +63,14 @@ export class UpdaterComponent {
       this.names_phase.push(nota["phaseName"]);
       this.notas_phase.push(nota["grade"]);
     }
-    console.log(this.names_phase);
   }
 
   goBack(){
     this.location.back();
+  }
+
+  edit(){
+    this.route.navigate(['/adm-updater']);
   }
 
   addMember(){
