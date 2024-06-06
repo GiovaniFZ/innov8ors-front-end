@@ -34,7 +34,7 @@ export class AdmUpdaterComponent {
   submitNewName(){
     const path = '/adm/teams/'+this.id+'/name';
     let json = {
-      "newName": this.newName
+      "newTeamName": this.newName
     }
     this.userDataService.handlePut(this.bearer, path, json).subscribe(
       (response) => {

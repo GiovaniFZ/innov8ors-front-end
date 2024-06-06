@@ -12,6 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ProjCreatorComponent } from './proj-creator/proj-creator.component';
@@ -28,7 +29,8 @@ const materialModules = [
   MatButtonModule,
   MatToolbarModule,
   MatProgressSpinnerModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatSlideToggleModule
 ];
 
 @NgModule({

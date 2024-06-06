@@ -85,10 +85,10 @@ export class UsersDataService {
       'Authorization': `Bearer ${bearer}`
     });
     return this.http.post<any>(
-      this.urlBase + endPoint,
+      this.urlBase + endPoint,json,
       { 
         headers: headers 
-      }, json);
+      });
   }
 
   handlePut(bearer:String, endPoint:String, json:any){
@@ -96,10 +96,10 @@ export class UsersDataService {
       'Authorization': `Bearer ${bearer}`
     });
     return this.http.put<any>(
-      this.urlBase + endPoint,
+      this.urlBase + endPoint, json,
       { 
         headers: headers 
-      }, json);
+      });
   }
 
   // Configurações de array

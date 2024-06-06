@@ -40,7 +40,8 @@
                 Atualizar status
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <button mat-raised-button color="primary" (click)="submitNewName()">Submeter</button>
+        <p><mat-slide-toggle [(ngModel)]="status" color="primary">Ativo</mat-slide-toggle></p>
+        <button mat-raised-button color="primary" (click)="submitNewStatus()">Submeter</button>
     </mat-expansion-panel>
 </div>
 <div class="but">
