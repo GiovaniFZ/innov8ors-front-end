@@ -55,8 +55,8 @@ export class UpdaterComponent {
     this.notas = this.json["grades"];
 
     for (let member of this.membros) {
-      this.member_emails.push(member["name"]);
-      this.member_names.push(member["email"]);
+      this.member_emails.push(member["email"]);
+      this.member_names.push(member["name"]);
     }
     
     for (let nota of this.notas) {
