@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersDataService } from '../services/users-data.service';
-import { CommonModule } from '@angular/common';
+import { Location, CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 
 @Component({
@@ -14,7 +14,7 @@ import { MatButton } from '@angular/material/button';
 })
 
 export class StudentComponent {
-  constructor(private route: ActivatedRoute, private userDataService: UsersDataService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userDataService: UsersDataService, private router: Router, private location: Location) { }
   panelOpenState: boolean = false;
   // Obtendo dados
   teams = this.userDataService.getTeams();
@@ -49,6 +49,10 @@ export class StudentComponent {
         console.log(error);
       }
     );
+  }
+
+  goBack(){
+    this.location.back();
   }
 
 }

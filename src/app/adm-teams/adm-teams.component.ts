@@ -5,9 +5,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterLink, RouterLinkActive, RouterOutlet, Router, ActivatedRoute } from '@angular/router';
 import { UsersDataService } from '../services/users-data.service';
-import { CommonModule } from '@angular/common';
+import { Location, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinner, ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 
 @Component({
@@ -22,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
     RouterLink, 
     RouterLinkActive,
     CommonModule,
+    MatProgressSpinner,
     FormsModule,
     MatInputModule],
   templateUrl: './adm-teams.component.html',
@@ -30,14 +32,19 @@ import { MatInputModule } from '@angular/material/input';
 export class AdmComponent {
   panelOpenState: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private userDataService: UsersDataService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private userDataService: UsersDataService, private location: Location) {}
   name = this.route.snapshot.paramMap.get('name');
   bearer = String(this.route.snapshot.paramMap.get('bearer'));
   teams = this.userDataService.getTeamsDetails();
   loading: boolean = false;
   teams_names:any;
   idTeam:string = '';
+  errorAt:boolean = false;
+  errorMessage: string = '';
 
+  // Progress Spinner
+  color = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
 
   ngOnInit(){
     let arr = [];
@@ -77,6 +84,10 @@ export class AdmComponent {
         console.log(error);
       }
     );
+  }
+
+  goBack(){
+    this.location.back();
   }
 
 }

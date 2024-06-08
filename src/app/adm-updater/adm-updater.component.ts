@@ -1,14 +1,29 @@
 import { Component } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { Location, CommonModule } from '@angular/common';
 import { UsersDataService } from '../services/users-data.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatInput } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-adm-updater',
+  standalone: true,
+  imports: [
+    MatExpansionModule, 
+    MatFormFieldModule,MatButton,
+    CommonModule, 
+    FormsModule,
+    MatInput,
+    MatIconModule],
   templateUrl: './adm-updater.component.html',
   styleUrl: './adm-updater.component.css'
 })
 export class AdmUpdaterComponent {
-  constructor(private userDataService: UsersDataService, private router: ActivatedRoute){}
+  constructor(private userDataService: UsersDataService, private router: ActivatedRoute, private location: Location){}
   json:any;
   advisorId = '';
   id = '';
@@ -77,4 +92,9 @@ export class AdmUpdaterComponent {
       console.log(error);
     });
   }
+
+  goBack(){
+    this.location.back();
+  }
+
 }

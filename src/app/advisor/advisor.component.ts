@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersDataService } from '../services/users-data.service';
-import { CommonModule } from '@angular/common';
+import { Location, CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner, ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
@@ -16,7 +16,7 @@ import { MatProgressSpinner, ProgressSpinnerMode } from '@angular/material/progr
   styleUrl: './advisor.component.css'
 })
 export class AdvisorComponent {
-  constructor(private route: ActivatedRoute, private userDataService: UsersDataService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private userDataService: UsersDataService, private router: Router, private location: Location) {}
   panelOpenState: boolean = false;
   phaseName = String(this.route.snapshot.paramMap.get('phaseName'));
   bearer = String(this.route.snapshot.paramMap.get('bearer'));
@@ -60,5 +60,9 @@ export class AdvisorComponent {
 
   panelOpened() {
     this.panelOpenState = true;
+  }
+
+  goBack(){
+    this.location.back();
   }
 }

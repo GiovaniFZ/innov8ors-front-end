@@ -34,6 +34,17 @@
         </mat-form-field>
         <button mat-raised-button color="fetincolor" (click)="updateData()">Submeter</button>
       </mat-expansion-panel>
+      <div class="spinner">
+        <mat-progress-spinner
+          *ngIf = "loading"
+          [color]="color"
+          [mode]="mode">
+        </mat-progress-spinner>
+        <p *ngIf="errorAt" class="erro">Um erro ocorreu ao obter os dados. Por favor, tente novamente! </p>
+      </div>
     </div>
   </mat-accordion>
+  <div class="bot">
+    <button mat-raised-button (click)="goBack()">Voltar</button>
+</div>
 </body>

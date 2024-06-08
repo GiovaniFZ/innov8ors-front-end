@@ -31,7 +31,6 @@ body{
     font-size: 15px;
 	margin: auto;
 	text-align: left;
-  height: 100%;
 }
 .mat-fetincolor{
   background-color: #5f98ee;
@@ -40,4 +39,20 @@ body{
 
 .space{
   margin-bottom: 4%;
+}
+
+.bot{
+  margin-top: 10%;
+  text-align: center;
+}
+
+.spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.erro{
+  text-align: center;
+  color: red;
 }
