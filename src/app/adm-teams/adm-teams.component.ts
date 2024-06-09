@@ -38,6 +38,7 @@ export class AdmComponent {
   teams = this.userDataService.getTeamsDetails();
   loading: boolean = false;
   teams_names:any;
+  teamIds:any;
   idTeam:string = '';
   errorAt:boolean = false;
   errorMessage: string = '';
@@ -49,18 +50,21 @@ export class AdmComponent {
   ngOnInit(){
     let arr = [];
     let arr2:any;
+    let arr1:any;
     arr = Object.entries(this.teams);
-    arr2 = arr[0][1];
+    arr1 = arr[0][0];
+    arr2 = arr[0][1]; // Nomes dos times
     this.teams_names = Object.values(arr2);
-    return this.teams_names;
+    this.teamIds = Object.keys(arr2);
   }
 
   updateData(){
     this.loading = true;
+    this.errorAt = false;
     this.userDataService.handleGet(this.bearer, '/adm/teams/' + this.idTeam).subscribe(
       (response) => {    
         this.userDataService.setTeamsDetails(response);
-        this.router.navigate(['/updater', this.bearer]);
+        this.router.navigate(['/adm-proj-details', this.bearer]);
       },
       (error) => {                              
         this.loading = false;
@@ -73,6 +77,7 @@ export class AdmComponent {
   }
   checkStages(){
     this.loading = true;
+    this.errorAt = false;
     this.userDataService.handleGet(this.bearer, '/adm/fetin-stages').subscribe(
       (response) => {    
         this.loading = false;
@@ -81,6 +86,7 @@ export class AdmComponent {
       },
       (error) => {                              
         this.loading = false;
+        this.errorAt = true;
         console.log(error);
       }
     );

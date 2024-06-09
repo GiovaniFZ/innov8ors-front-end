@@ -17,8 +17,8 @@
             Projetos cadastrados
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div *ngFor="let team of teams_names">
-          <p> • {{ team }}</p>
+        <div *ngFor="let team of teams_names; let i = index">
+          <p> • {{teamIds[i]}}: {{ team }}</p>
         </div>
       </mat-expansion-panel>
 

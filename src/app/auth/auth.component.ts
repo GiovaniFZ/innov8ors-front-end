@@ -38,7 +38,7 @@ export class AuthComponent {
         this.router.navigate(['/interm-screen', this.bearer, this.name, this.role]);
       },
       (error) => {
-        console.error('Request failed with error')
+        console.error('Request failed with error');
         this.errorMessage = error;
         this.loading = false;
         this.attempt = true;

@@ -13,7 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
+import { MatIcon } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { ProjCreatorComponent } from './proj-creator/proj-creator.component';
 import { IntermScreenComponent } from './interm-screen/interm-screen.component';
@@ -21,6 +21,7 @@ import { HelpPageComponent } from './help-page/help-page.component';
 import { ProjDetailsComponent } from './proj-details/proj-details.component';
 import { AdmFetinStagesComponent } from './adm-fetin-stages/adm-fetin-stages.component';
 import { AdmUpdaterComponent } from './adm-updater/adm-updater.component';
+import { AdmProjDetailsComponent } from './adm-proj-details/adm-proj-details.component';
 
 const materialModules = [
   CommonModule,
@@ -30,7 +31,8 @@ const materialModules = [
   MatToolbarModule,
   MatProgressSpinnerModule,
   MatExpansionModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatIcon
 ];
 
 @NgModule({
@@ -47,7 +49,9 @@ const materialModules = [
     ...materialModules,
   ],
   providers: [],
-  declarations: [ AppComponent, AuthComponent, ProjCreatorComponent, IntermScreenComponent, HelpPageComponent ],
+  declarations: [ AppComponent, AuthComponent, ProjCreatorComponent, 
+      IntermScreenComponent, HelpPageComponent, 
+      AdmUpdaterComponent, ProjDetailsComponent, AdmProjDetailsComponent ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

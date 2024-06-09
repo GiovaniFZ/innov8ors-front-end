@@ -1,18 +1,10 @@
 import { Component } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { ActivatedRoute } from '@angular/router';
 import { Location, CommonModule } from '@angular/common';
 import { UsersDataService } from '../services/users-data.service';
 
 @Component({
   selector: 'app-proj-details',
-  standalone: true,
-  imports: [
-    MatExpansionModule, 
-    MatFormFieldModule,MatButton,
-    CommonModule],
   templateUrl: './proj-details.component.html',
   styleUrl: './proj-details.component.css'
 })

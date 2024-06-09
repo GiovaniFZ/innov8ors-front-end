@@ -56,6 +56,15 @@
                     <input matInput [(ngModel)]="memberEmail" type="text">
                 </mat-form-field>
                 <button mat-raised-button color="primary" (click)="addMember()">Submeter</button>
+                <div class="spinner">
+                    <mat-progress-spinner
+                      *ngIf = "loading"
+                      [color]="color"
+                      [mode]="mode">
+                    </mat-progress-spinner>
+                    <p *ngIf="memAdded" class="success">Membro adicionado com sucesso!</p>
+                    <p *ngIf="errorAt" class="erro">Erro ao adicionar. Por favor, tente novamente!</p>
+                  </div>
             </mat-expansion-panel>
 
             <mat-expansion-panel class="expansion2">
@@ -66,13 +75,22 @@
                 </mat-expansion-panel-header>
                 <mat-form-field>
                     <mat-label>ID da fase</mat-label>
-                    <input matInput [(ngModel)]="phaseId" type="text">
+                    <input matInput [(ngModel)]="phaseId" type="number">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Nota</mat-label>
-                    <input matInput [(ngModel)]="newGrade" type="text">
+                    <input matInput [(ngModel)]="newGrade" type="number" min="0" max="100">
                 </mat-form-field>
-                <button mat-raised-button color="primary">Submeter</button>
+                <button mat-raised-button color="primary" (click)="addGrade()">Submeter</button>
+                <div class="spinner">
+                    <mat-progress-spinner
+                      *ngIf = "loading"
+                      [color]="color"
+                      [mode]="mode">
+                    </mat-progress-spinner>
+                    <p *ngIf="gradeAdded" class="success">Nota adicionada com sucesso!</p>
+                    <p *ngIf="errorAt" class="erro">Erro ao adicionar. Por favor, tente novamente!</p>
+                  </div>
             </mat-expansion-panel>
 
             <mat-expansion-panel class="expansion2">
@@ -86,6 +104,15 @@
                     <input matInput [(ngModel)]="removedMember" type="text">
                 </mat-form-field>
                 <button mat-raised-button color="primary" (click)="deleteMember()">Submeter</button>
+                <div class="spinner">
+                    <mat-progress-spinner
+                      *ngIf = "loading"
+                      [color]="color"
+                      [mode]="mode">
+                    </mat-progress-spinner>
+                    <p *ngIf="membDeleted" class="success">Membro excluído com sucesso!</p>
+                    <p *ngIf="errorAt" class="erro">Erro ao deletar. Por favor, tente novamente!</p>
+                  </div>
             </mat-expansion-panel>
 
         </mat-accordion>

@@ -1,28 +1,15 @@
 import { Component } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location, CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
 import { UsersDataService } from '../services/users-data.service';
-import { FormsModule } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-updater',
-  standalone: true,
-  imports: [
-    MatExpansionModule, 
-    MatFormFieldModule,MatButton,
-    CommonModule, 
-    FormsModule,
-    MatInput,
-    MatIconModule],
-  templateUrl: './updater.component.html',
-  styleUrl: './updater.component.css'
+  selector: 'app-adm-proj-details',
+  templateUrl: './adm-proj-details.component.html',
+  styleUrl: './adm-proj-details.component.css'
 })
-export class UpdaterComponent {
+export class AdmProjDetailsComponent {
   constructor(private router: ActivatedRoute, private location: Location, private userDataService: UsersDataService, private route: Router) { }
   panelOpenState: boolean = false;
   id = '';
@@ -43,7 +30,15 @@ export class UpdaterComponent {
   removedMember = '';
   bearer = String(this.router.snapshot.paramMap.get('bearer'));
   newTitle:string = '';
+  // Controle de errors
   isEditing: boolean = false;
+  loading:boolean = false;
+  errorAt:boolean = false;
+  memAdded:boolean = false;
+  membDeleted:boolean = false;
+  gradeAdded:boolean = false;
+  mode:ProgressSpinnerMode = 'indeterminate';
+  color = 'primary';
 
 
   ngOnInit(){
@@ -74,28 +69,72 @@ export class UpdaterComponent {
   }
 
   addMember(){
-    const path = '/adm/teams/' + this.id + '/members'
+    this.loading = true;
+    this.errorAt = false;
+    const path = '/adm/teams/' + this.id + '/members';
     let json2 = {
       name: this.memberName,
       email: this.memberEmail
     }
     this.userDataService.handlePost(this.bearer, path, json2).subscribe(
       (response) => {
+        this.loading = false;
+        console.log('Entrou no response');
         console.log(response)
       },
       (error) => {      
+        console.log('Entrou no error');
+        this.loading = false;
         console.log(error);
       }
     );
   }
 
-  deleteMember(){
-    const path = '/adm/teams/' + this.id + '/members'
-    this.userDataService.handleDelete(this.bearer, path).subscribe(
+  addGrade(){
+    this.errorAt = false;
+    this.loading = true;
+    const path = '/adm/teams/' + this.id + '/grade';
+    let json = {
+      "phaseId": this.phaseId,
+      "grade": this.newGrade
+    }
+    this.userDataService.handlePost(this.bearer, path, json).subscribe(
       (response) => {
+        this.loading = false;
+        this.errorAt = false;
+        this.gradeAdded = true;
+        console.log(response)
+      },
+      (error) => {    
+        if(error.status === 200){
+          this.loading = false;
+          this.errorAt = false;
+          this.gradeAdded = true;
+        }
+        else{
+          this.loading = false;
+          this.errorAt = true;
+          this.gradeAdded = false;
+          console.log(error);
+        }
+      }
+    )
+  }
+
+  deleteMember(){
+    this.loading = true;
+    this.errorAt = false;
+    const path = '/adm/teams/' + this.id + '/members';
+    this.userDataService.handleDelete(this.bearer, path, this.removedMember).subscribe(
+      (response) => {
+        console.log('Entrou no response');
+        this.loading = false;
         console.log(response)
       },
       (error) => {      
+        console.log('Entrou no error');
+        this.loading = false;
+        this.errorAt = true;
         console.log(error);
       }
     );

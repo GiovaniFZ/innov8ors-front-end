@@ -3,7 +3,7 @@ import { AdvisorComponent } from './advisor/advisor.component';
 import { AuthComponent } from './auth/auth.component';
 import { StudentComponent } from './student/student.component';
 import { AdmComponent } from './adm-teams/adm-teams.component';
-import { UpdaterComponent } from './updater/updater.component';
+import { AdmProjDetailsComponent } from './adm-proj-details/adm-proj-details.component';
 import { NgModule } from '@angular/core';
 import { ProjCreatorComponent } from './proj-creator/proj-creator.component';
 import { IntermScreenComponent } from './interm-screen/interm-screen.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
     { path: 'advisor/:phaseName/:bearer', component: AdvisorComponent },
     { path: 'student/:phaseName/:bearer', component: StudentComponent },
     { path: 'adm-teams/:bearer/:name', component:AdmComponent },
-    { path: 'updater/:bearer', component:UpdaterComponent },
+    { path: 'adm-proj-details/:bearer', component:AdmProjDetailsComponent },
     { path: 'create-proj/:bearer', component:ProjCreatorComponent },
     { path: 'interm-screen/:bearer/:name/:role', component:IntermScreenComponent },
     { path: 'help-page', component:HelpPageComponent },

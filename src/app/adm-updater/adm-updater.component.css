@@ -35,3 +35,21 @@ body{
   justify-content: center;
 }
 
+.spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.erro{
+  text-align: center;
+  margin-top: 4%;
+  color: red;
+}
+
+.success{
+  text-align: center;
+  margin-top: 4%;
+  color: green;
+}
+

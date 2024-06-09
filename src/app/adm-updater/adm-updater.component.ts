@@ -1,24 +1,11 @@
 import { Component } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { Location, CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
 import { UsersDataService } from '../services/users-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-adm-updater',
-  standalone: true,
-  imports: [
-    MatExpansionModule, 
-    MatFormFieldModule,MatButton,
-    CommonModule, 
-    FormsModule,
-    MatInput,
-    MatIconModule],
   templateUrl: './adm-updater.component.html',
   styleUrl: './adm-updater.component.css'
 })
@@ -34,6 +21,14 @@ export class AdmUpdaterComponent {
   newAdvName = '';
   newAdvEmail = '';
   status:boolean = false;
+  // Progress Spinner
+  color = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
+  errorAt: boolean = false;
+  loading:boolean = false;
+  advUpdated:boolean = false;
+  membUpdated:boolean = false;
+  statUpdated:boolean = false;
 
   bearer = String(this.router.snapshot.paramMap.get('bearer'));
   ngOnInit(){
@@ -47,21 +42,34 @@ export class AdmUpdaterComponent {
     this.notas = this.json["grades"];
   }
   submitNewName(){
+    this.loading = true;
     const path = '/adm/teams/'+this.id+'/name';
     let json = {
       "newTeamName": this.newName
     }
     this.userDataService.handlePut(this.bearer, path, json).subscribe(
       (response) => {
-        console.log(response)
+        this.membUpdated = true;
+        this.loading = false;
+        this.errorAt = false;
+        console.log(response);
       },
-      (error) => {      
-        console.log(error);
+      (error) => {
+        if(error.status === 200){
+          this.membUpdated = true; 
+          this.errorAt = false;
+          this.loading = false; 
+        }
+        else{
+          this.errorAt = true;
+          console.log(error);
+        }    
       }
     );
   }
 
   submitNewAdv(){
+    this.loading = true;
     let json = {
       "newAdvisor": {
         "name": this.newAdvName,
@@ -71,9 +79,19 @@ export class AdmUpdaterComponent {
     const path = '/adm/teams/'+this.id+'/advisor';
     this.userDataService.handlePut(this.bearer, path, json).subscribe(
       (response) => {
+        this.loading = false;
+        this.errorAt = false;
+        this.advUpdated = true;
         console.log(response)
       },
-      (error) => {      
+      (error) => {
+        if(error.status === 200){
+          this.advUpdated = true; 
+          this.errorAt = false;
+          this.loading = false; 
+        }
+        this.errorAt = true;
+        this.loading = false;      
         console.log(error);
       });
   }
@@ -86,9 +104,17 @@ export class AdmUpdaterComponent {
     console.log('Status');
   this.userDataService.handlePut(this.bearer, path, json).subscribe(
     (response) => {
-      console.log(response)
+      this.errorAt = false;
+      this.statUpdated = true;
+      console.log(response);
     },
-    (error) => {      
+    (error) => {  
+      if(error.status === 200){
+        this.membUpdated = true; 
+        this.errorAt = false;
+        this.loading = false; 
+      }    
+      this.errorAt = true;
       console.log(error);
     });
   }

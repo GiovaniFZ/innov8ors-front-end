@@ -74,3 +74,15 @@ expansion ul{
   display: flex;
   align-items: center;
 }
+
+.erro{
+  text-align: center;
+  margin-top: 4%;
+  color: red;
+}
+
+.success{
+  text-align: center;
+  margin-top: 4%;
+  color: green;
+}

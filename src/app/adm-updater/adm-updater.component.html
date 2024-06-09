@@ -14,6 +14,15 @@
             <input matInput [(ngModel)]="newName" type="text">
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="submitNewName()">Submeter</button>
+        <div class="spinner">
+            <mat-progress-spinner
+              *ngIf = "loading"
+              [color]="color"
+              [mode]="mode">
+            </mat-progress-spinner>
+            <p *ngIf="membUpdated" class="success">Nome atualizado! </p>
+            <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
+          </div>
     </mat-expansion-panel>
 
     <mat-expansion-panel class="expansion2">
@@ -32,6 +41,15 @@
         <input matInput [(ngModel)]="newAdvEmail" type="text">
     </mat-form-field>
         <button mat-raised-button color="primary" (click)="submitNewAdv()">Submeter</button>
+        <div class="spinner">
+            <mat-progress-spinner
+              *ngIf = "loading"
+              [color]="color"
+              [mode]="mode">
+            </mat-progress-spinner>
+            <p *ngIf="advUpdated" class="success">Orientador atualizado! </p>
+            <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
+          </div>
     </mat-expansion-panel>
 
     <mat-expansion-panel class="expansion2">
@@ -40,8 +58,17 @@
                 Atualizar status
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <p><mat-slide-toggle [(ngModel)]="status" color="primary">Ativo</mat-slide-toggle></p>
-        <button mat-raised-button color="primary" (click)="submitNewStatus()">Submeter</button>
+        <p><mat-slide-toggle name="status" [(ngModel)]="status" color="primary">Ativo</mat-slide-toggle></p>
+        <button class="but" mat-raised-button color="primary" (click)="submitNewStatus()">Submeter</button>
+        <div class="spinner">
+            <mat-progress-spinner
+              *ngIf = "loading"
+              [color]="color"
+              [mode]="mode">
+            </mat-progress-spinner>
+            <p *ngIf="statUpdated" class="success">Status atualizado! </p>
+            <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
+          </div>
     </mat-expansion-panel>
 </div>
 <div class="but">
