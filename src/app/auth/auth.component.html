@@ -3,8 +3,8 @@
 <p></p>
 <h2>Faça seu login!</h2>
   <mat-form-field>
-    <mat-label>Nome</mat-label>
-    <input matInput [formControl]="nameController" [(ngModel)]="textoUsuario">
+    <mat-label>Email</mat-label>
+    <input matInput [formControl]="nameController" [(ngModel)]="textoUsuario" type="email">
     @if (nameController.hasError('required')) {
       <mat-error>Nome é <strong>obrigatório</strong></mat-error>
     }

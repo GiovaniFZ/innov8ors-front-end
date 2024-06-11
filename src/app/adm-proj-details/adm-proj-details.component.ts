@@ -124,8 +124,8 @@ export class AdmProjDetailsComponent {
   deleteMember(){
     this.loading = true;
     this.errorAt = false;
-    const path = '/adm/teams/' + this.id + '/members';
-    this.userDataService.handleDelete(this.bearer, path, this.removedMember).subscribe(
+    const path = '/adm/teams/' + this.id + '/members?memberEmail=' + this.removedMember;
+    this.userDataService.handleDelete(this.bearer, path).subscribe(
       (response) => {
         console.log('Entrou no response');
         this.loading = false;

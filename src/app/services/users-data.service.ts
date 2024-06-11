@@ -69,10 +69,9 @@ export class UsersDataService {
     )
   }
 
-  handleDelete(bearer: String, endPoint: string, arg1: string){
+  handleDelete(bearer: String, endPoint: string){
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${bearer}`,
-      'arg1': arg1
+      'Authorization': `Bearer ${bearer}`
     });
     return this.http.delete<any>(
       this.urlBase + endPoint,
