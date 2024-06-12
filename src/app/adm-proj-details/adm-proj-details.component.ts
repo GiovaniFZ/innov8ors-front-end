@@ -35,6 +35,7 @@ export class AdmProjDetailsComponent {
   memAdded:boolean = false;
   membDeleted:boolean = false;
   gradeAdded:boolean = false;
+  names_phase2:string[] = []
 
   // Progress Spinner
   mode:ProgressSpinnerMode = 'indeterminate';
@@ -74,6 +75,8 @@ export class AdmProjDetailsComponent {
       this.names_phase.push(nota["phaseName"]); // Obtem os nomes das fases
       this.notas_phase.push(nota["grade"]); // Obtem as notas
     }
+
+    this.names_phase2 = ['Ideacao (Atualizado)', 'Desenvolvimento 1', 'Desenvolvimento 2', 'Reta Final'];
 
   }
 

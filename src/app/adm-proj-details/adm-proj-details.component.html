@@ -75,7 +75,7 @@
                 </mat-expansion-panel-header>
                 <button mat-button [matMenuTriggerFor]="phaseMenu">{{ selectedPhase }}</button>
                 <mat-menu #phaseMenu="matMenu">
-                    <button *ngFor="let names of names_phase; let i = index" 
+                    <button *ngFor="let names of names_phase2; let i = index" 
                     mat-menu-item (click)="selectPhase(names, i)">{{ names }}</button>
                   </mat-menu>
                 <mat-form-field>
