@@ -73,15 +73,18 @@
                         Adicionar nota
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                <mat-form-field>
-                    <mat-label>ID da fase</mat-label>
-                    <input matInput [(ngModel)]="phaseId" type="number">
-                </mat-form-field>
+                <button mat-button [matMenuTriggerFor]="phaseMenu">{{ selectedPhase }}</button>
+                <mat-menu #phaseMenu="matMenu">
+                    <button *ngFor="let names of names_phase; let i = index" 
+                    mat-menu-item (click)="selectPhase(names, i)">{{ names }}</button>
+                  </mat-menu>
                 <mat-form-field>
                     <mat-label>Nota</mat-label>
                     <input matInput [(ngModel)]="newGrade" type="number" min="0" max="100">
                 </mat-form-field>
+                <div class="bot">
                 <button mat-raised-button color="primary" (click)="addGrade()">Submeter</button>
+                </div>
                 <div class="spinner">
                     <mat-progress-spinner
                       *ngIf = "loading"
@@ -99,11 +102,14 @@
                         Remover membro
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                <mat-form-field>
-                    <mat-label>Email do membro</mat-label>
-                    <input matInput [(ngModel)]="removedMember" type="email">
-                </mat-form-field>
+                <button mat-button [matMenuTriggerFor]="membMenu">{{ selectedMemb }}</button>
+                <mat-menu #membMenu="matMenu">
+                    <button *ngFor="let membro of member_names; let i = index" 
+                    mat-menu-item (click)="selectMemb(membro, i)">{{ membro }}</button>
+                  </mat-menu>
+                  <div class="bot">
                 <button mat-raised-button color="primary" (click)="deleteMember()">Submeter</button>
+            </div>
                 <div class="spinner">
                     <mat-progress-spinner
                       *ngIf = "loading"

@@ -21,13 +21,11 @@ export class AdmProjDetailsComponent {
   names_phase:string[] = [];
   member_emails:string[] = [];
   member_names:string[] = [];
-  phaseNames = [];
   // Dados editáveis
   memberName = '';
   memberEmail = '';
   phaseId = '';
   newGrade = '';
-  removedMember = '';
   bearer = String(this.router.snapshot.paramMap.get('bearer'));
   newTitle:string = '';
   // Controle de errors
@@ -37,9 +35,27 @@ export class AdmProjDetailsComponent {
   memAdded:boolean = false;
   membDeleted:boolean = false;
   gradeAdded:boolean = false;
+
+  // Progress Spinner
   mode:ProgressSpinnerMode = 'indeterminate';
   color = 'primary';
 
+  // Menu
+  selectedMemb:string = 'Selecione um membro';
+  selectedPhase:string = 'Selecione uma fase';
+  posicaoMem: number = 0;
+  posicaoPhase: number = 0;
+
+  selectMemb(selectedMemb: string, posicaoMem:number){
+    this.selectedMemb = selectedMemb;
+    this.posicaoMem = posicaoMem;
+  }
+
+  selectPhase(selectedPhase: string, posicaoPhase: number){
+    this.selectedPhase = selectedPhase;
+    this.posicaoPhase = posicaoPhase + 1;
+    console.log(posicaoPhase)
+  }
 
   ngOnInit(){
     this.json = this.userDataService.getTeamsDetails();
@@ -48,16 +64,17 @@ export class AdmProjDetailsComponent {
     this.name = this.json["teamName"];
     this.membros = this.json["members"];
     this.notas = this.json["grades"];
-
+    console.log(this.notas);
     for (let member of this.membros) {
       this.member_emails.push(member["email"]);
       this.member_names.push(member["name"]);
     }
     
     for (let nota of this.notas) {
-      this.names_phase.push(nota["phaseName"]);
-      this.notas_phase.push(nota["grade"]);
+      this.names_phase.push(nota["phaseName"]); // Obtem os nomes das fases
+      this.notas_phase.push(nota["grade"]); // Obtem as notas
     }
+
   }
 
   goBack(){
@@ -99,7 +116,7 @@ export class AdmProjDetailsComponent {
     this.loading = true;
     const path = '/adm/teams/' + this.id + '/grade';
     let json = {
-      "phaseId": this.phaseId,
+      "phaseId": this.posicaoPhase,
       "grade": this.newGrade
     }
     this.userDataService.handlePost(this.bearer, path, json).subscribe(
@@ -128,7 +145,8 @@ export class AdmProjDetailsComponent {
   deleteMember(){
     this.loading = true;
     this.errorAt = false;
-    const path = '/adm/teams/' + this.id + '/members?memberEmail=' + this.removedMember;
+    let removed = this.member_emails[this.posicaoMem]
+    const path = '/adm/teams/' + this.id + '/members?memberEmail=' + removed;
     this.userDataService.handleDelete(this.bearer, path).subscribe(
       () => {
         this.membDeleted = true;
