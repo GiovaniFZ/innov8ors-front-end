@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -22,6 +23,7 @@ import { ProjDetailsComponent } from './proj-details/proj-details.component';
 import { AdmFetinStagesComponent } from './adm-fetin-stages/adm-fetin-stages.component';
 import { AdmUpdaterComponent } from './adm-updater/adm-updater.component';
 import { AdmProjDetailsComponent } from './adm-proj-details/adm-proj-details.component';
+import { AdmComponent } from './adm-teams/adm-teams.component';
 
 const materialModules = [
   CommonModule,
@@ -32,7 +34,8 @@ const materialModules = [
   MatProgressSpinnerModule,
   MatExpansionModule,
   MatSlideToggleModule,
-  MatIcon
+  MatIcon,
+  MatMenuModule
 ];
 
 @NgModule({
@@ -51,7 +54,8 @@ const materialModules = [
   providers: [],
   declarations: [ AppComponent, AuthComponent, ProjCreatorComponent, 
       IntermScreenComponent, HelpPageComponent, 
-      AdmUpdaterComponent, ProjDetailsComponent, AdmProjDetailsComponent ],
+      AdmUpdaterComponent, ProjDetailsComponent, AdmProjDetailsComponent,
+      AdmComponent ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,31 +1,12 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatButton } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { RouterLink, RouterLinkActive, RouterOutlet, Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UsersDataService } from '../services/users-data.service';
-import { Location, CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinner, ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { Location } from '@angular/common';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 
 @Component({
   selector: 'app-adm',
-  standalone: true,
-  imports: [
-    MatButtonModule, 
-    MatButton, 
-    MatExpansionModule, 
-    MatFormFieldModule,
-    RouterOutlet, 
-    RouterLink, 
-    RouterLinkActive,
-    CommonModule,
-    MatProgressSpinner,
-    FormsModule,
-    MatInputModule],
   templateUrl: './adm-teams.component.html',
   styleUrl: './adm-teams.component.css'
 })
@@ -39,13 +20,21 @@ export class AdmComponent {
   loading: boolean = false;
   teams_names:any;
   teamIds:any;
-  idTeam:string = '';
   errorAt:boolean = false;
   errorMessage: string = '';
 
   // Progress Spinner
   color = 'primary';
   mode: ProgressSpinnerMode = 'indeterminate';
+
+  // Menu
+  selectedTeam: string = 'Selecione um time';
+  posicao:number = 0;
+
+  selectTeam(team: string, posicao:number) {
+    this.selectedTeam = team;
+    this.posicao = posicao;
+  }
 
   ngOnInit(){
     let arr = [];
@@ -61,7 +50,8 @@ export class AdmComponent {
   updateData(){
     this.loading = true;
     this.errorAt = false;
-    this.userDataService.handleGet(this.bearer, '/adm/teams/' + this.idTeam).subscribe(
+    let idTeam = this.teamIds[this.posicao];
+    this.userDataService.handleGet(this.bearer, '/adm/teams/' + idTeam).subscribe(
       (response) => {    
         this.userDataService.setTeamsDetails(response);
         this.router.navigate(['/adm-proj-details', this.bearer]);

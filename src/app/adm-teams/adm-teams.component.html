@@ -28,11 +28,14 @@
             Atualizar dados
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-form-field>
-          <mat-label>Insira o ID do time </mat-label>
-          <input matInput [(ngModel)]="idTeam" type="number" max="100" min="0">
-        </mat-form-field>
+          <button mat-button [matMenuTriggerFor]="teamMenu">{{ selectedTeam }}</button>
+          <mat-menu #teamMenu="matMenu">
+            <button *ngFor="let team of teams_names; let i = index" 
+            mat-menu-item (click)="selectTeam(team, i)">{{ team }}</button>
+          </mat-menu>
+          <div class="bot">
         <button mat-raised-button color="fetincolor" (click)="updateData()">Submeter</button>
+      </div>
       </mat-expansion-panel>
       <div class="spinner">
         <mat-progress-spinner
