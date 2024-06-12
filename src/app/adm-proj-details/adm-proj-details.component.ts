@@ -77,15 +77,19 @@ export class AdmProjDetailsComponent {
       email: this.memberEmail
     }
     this.userDataService.handlePost(this.bearer, path, json2).subscribe(
-      (response) => {
+      () => {
         this.loading = false;
-        console.log('Entrou no response');
-        console.log(response)
+        this.memAdded = true;
       },
-      (error) => {      
-        console.log('Entrou no error');
-        this.loading = false;
-        console.log(error);
+      (error) => {
+        if(error.status == 200){
+          this.loading = false;
+          this.memAdded = true;
+        }else{
+          this.loading = false;
+          this.errorAt = true;
+          console.log(error);
+        }      
       }
     );
   }
@@ -126,16 +130,19 @@ export class AdmProjDetailsComponent {
     this.errorAt = false;
     const path = '/adm/teams/' + this.id + '/members?memberEmail=' + this.removedMember;
     this.userDataService.handleDelete(this.bearer, path).subscribe(
-      (response) => {
-        console.log('Entrou no response');
+      () => {
+        this.membDeleted = true;
         this.loading = false;
-        console.log(response)
       },
-      (error) => {      
-        console.log('Entrou no error');
-        this.loading = false;
-        this.errorAt = true;
-        console.log(error);
+      (error) => {
+        if(error.status === 200){
+          this.membDeleted = true;
+          this.loading = false;
+        }else{
+          this.loading = false;
+          this.errorAt = true;
+          console.log(error);
+        }      
       }
     );
   }
