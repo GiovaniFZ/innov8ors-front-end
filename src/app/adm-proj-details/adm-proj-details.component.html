@@ -4,6 +4,8 @@
                 <mat-icon>edit</mat-icon>
               </button>
         <p id="Titulo">{{ name }}</p>
+        <p *ngIf="active" class="success">Ativo</p>
+        <p *ngIf="!active" class="erro">Inativo</p>
         <div id="ID">
             <p>ID: {{ id }}</p>
         </div>

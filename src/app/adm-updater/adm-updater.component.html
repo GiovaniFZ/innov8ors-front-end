@@ -28,6 +28,30 @@
     <mat-expansion-panel class="expansion2">
         <mat-expansion-panel-header>
             <mat-panel-title>
+                Editar membro responsável
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>Membro responsável atual: {{ member_names[0] }}</p>
+            <button mat-button [matMenuTriggerFor]="membMenu">{{ selectedMemb }}</button>
+            <mat-menu #membMenu="matMenu">
+                <button *ngFor="let membro of member_names let i = index" 
+                mat-menu-item (click)="selectMemb(membro, i)">{{ membro }}</button>
+              </mat-menu>
+              <button mat-raised-button color="primary" (click)="submitNewRes()">Submeter</button>
+              <div class="spinner">
+                  <mat-progress-spinner
+                    *ngIf = "loading"
+                    [color]="color"
+                    [mode]="mode">
+                  </mat-progress-spinner>
+                  <p *ngIf="resUpdated" class="success">Membro responsável atualizado! </p>
+                  <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
+                </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="expansion2">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
                 Atualizar orientador
             </mat-panel-title>
         </mat-expansion-panel-header>

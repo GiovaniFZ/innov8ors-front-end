@@ -35,7 +35,8 @@ export class AdmProjDetailsComponent {
   memAdded:boolean = false;
   membDeleted:boolean = false;
   gradeAdded:boolean = false;
-  names_phase2:string[] = []
+  names_phase2:string[] = [];
+  active:boolean = false;
 
   // Progress Spinner
   mode:ProgressSpinnerMode = 'indeterminate';
@@ -65,7 +66,8 @@ export class AdmProjDetailsComponent {
     this.name = this.json["teamName"];
     this.membros = this.json["members"];
     this.notas = this.json["grades"];
-    console.log(this.notas);
+    this.active = this.json["active"];
+    console.log(this.json);
     for (let member of this.membros) {
       this.member_emails.push(member["email"]);
       this.member_names.push(member["name"]);

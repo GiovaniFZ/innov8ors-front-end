@@ -15,12 +15,14 @@ export class AdmUpdaterComponent {
   advisorId = '';
   id = '';
   name = '';
-  membros = '';
+  membros = [];
   notas = '';
   newName = '';
   newAdvName = '';
   newAdvEmail = '';
   status:boolean = false;
+  member_names: string[] = [];
+  member_emails:string[] = [];
   // Progress Spinner
   color = 'primary';
   mode: ProgressSpinnerMode = 'indeterminate';
@@ -29,6 +31,7 @@ export class AdmUpdaterComponent {
   advUpdated:boolean = false;
   membUpdated:boolean = false;
   statUpdated:boolean = false;
+  resUpdated:boolean = false;
 
   bearer = String(this.router.snapshot.paramMap.get('bearer'));
   ngOnInit(){
@@ -40,7 +43,23 @@ export class AdmUpdaterComponent {
     this.name = this.json["teamName"];
     this.membros = this.json["members"];
     this.notas = this.json["grades"];
+
+    for(let member of this.membros){
+      this.member_names.push(member["name"]);
+      this.member_emails.push(member["email"]);
+    }
+
+    console.log(this.membros)
   }
+
+  // Menu
+  selectedMemb:string = 'Selecione um membro';
+  posicao:number = 0;
+  selectMemb(selectedMemb: string, posicao: number){
+    this.selectedMemb = selectedMemb;
+    this.posicao = posicao;
+  }
+
   submitNewName(){
     this.loading = true;
     const path = '/adm/teams/'+this.id+'/name';
@@ -117,6 +136,31 @@ export class AdmUpdaterComponent {
       this.errorAt = true;
       console.log(error);
     });
+  }
+
+  submitNewRes(){
+    this.loading = true;
+    this.errorAt = false;
+    const selected = this.member_emails[this.posicao];
+    const path = '/adm/teams/' + this.id + '/set-responsible-member?memberEmail=' + selected;
+    let json = {}
+    this.userDataService.handlePost(this.bearer, path, json).subscribe(
+      () => {
+        this.loading = false;
+        this.errorAt = false;
+        this.resUpdated = true;
+      },
+      (error) => {
+        if(error.status === 200){
+          this.loading = false;
+          this.errorAt = false;
+          this.resUpdated = true;
+        }else{
+          this.errorAt = true;
+          this.loading = false;      
+          console.log(error);
+        }
+      });
   }
 
   goBack(){
