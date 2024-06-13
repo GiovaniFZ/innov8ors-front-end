@@ -21,6 +21,7 @@ export class ProjDetailsComponent {
   member_emails:string[] = [];
   member_names:string[] = [];
   phaseNames = [];
+  active = false;
 
   ngOnInit(){
     this.json = this.userDataService.getTeamsDetails();
@@ -28,6 +29,7 @@ export class ProjDetailsComponent {
     this.name = this.json["teamName"];
     this.membros = this.json["members"];
     this.notas = this.json["grades"];
+    this.active = this.json["active"];
 
     for (let member of this.membros) {
       this.member_emails.push(member["email"]);
@@ -38,7 +40,7 @@ export class ProjDetailsComponent {
       this.names_phase.push(nota["phaseName"]);
       this.notas_phase.push(nota["grade"]);
     }
-    console.log(this.names_phase);
+    console.log(this.json);
   }
 
   goBack(){

@@ -63,4 +63,16 @@ body{
 .mat-fetincolor{
     background-color: #5f98ee;
     color: #ffffff;
-  }
+}
+
+.active, .inactive{
+    font-weight: bold;
+}
+
+.active{
+    color: green;
+}
+
+.inactive{
+    color: red;
+}

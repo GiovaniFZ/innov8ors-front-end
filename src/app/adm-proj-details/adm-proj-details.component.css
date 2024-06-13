@@ -78,11 +78,19 @@ expansion ul{
 .erro{
   text-align: center;
   margin-top: 4%;
+}
+
+.erro, .inactive{
   color: red;
+  font-weight: bold;
+}
+
+.success, .active{
+  color: green;
+  font-weight: bold;
 }
 
 .success{
   text-align: center;
   margin-top: 4%;
-  color: green;
 }

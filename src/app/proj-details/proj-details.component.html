@@ -2,8 +2,8 @@
     <div id="Fundo">
             <p id="ID">Detalhes do Projeto</p>
             <p id="Titulo">{{ name }}</p>
-            <p>Ativo</p>
-            <p>Inativo</p>
+            <p *ngIf="active" class="active">Ativo</p>
+            <p *ngIf="!active" class="inactive">Inativo</p>
         <div id="ID">
             <p>ID: {{ id }}</p>
         </div>
