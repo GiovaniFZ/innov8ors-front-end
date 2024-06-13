@@ -39,17 +39,20 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 4%;
+}
+
+.success, .erro{
+  text-align: center;
+  margin-top: 4%;
+  font-weight: bold;
 }
 
 .erro{
-  text-align: center;
-  margin-top: 4%;
   color: red;
 }
 
 .success{
-  text-align: center;
-  margin-top: 4%;
   color: green;
 }
 

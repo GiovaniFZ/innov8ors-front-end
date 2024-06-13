@@ -41,9 +41,12 @@ body{
   margin-bottom: 4%;
 }
 
+.bot, .bot2{
+  text-align: center;
+}
+
 .bot{
   margin-top: 10%;
-  text-align: center;
 }
 
 .spinner{

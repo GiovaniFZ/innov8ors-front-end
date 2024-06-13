@@ -2,100 +2,92 @@
     <div class="titulo">Editar dados do projeto
     </div>
     <div class="expansion">
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Atualizar nome
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>Nome antigo: {{ name }} </p>
-        <mat-form-field>
-            <mat-label>Novo nome</mat-label>
-            <input matInput [(ngModel)]="newName" type="text">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="submitNewName()">Submeter</button>
-        <div class="spinner">
-            <mat-progress-spinner
-              *ngIf = "loading"
-              [color]="color"
-              [mode]="mode">
-            </mat-progress-spinner>
-            <p *ngIf="membUpdated" class="success">Nome atualizado! </p>
-            <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
-          </div>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel class="expansion2">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Editar membro responsável
-            </mat-panel-title>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Atualizar nome
+                </mat-panel-title>
             </mat-expansion-panel-header>
-            <p>Membro responsável atual: {{ member_names[0] }}</p>
+            <p>Nome antigo: {{ name }} </p>
+            <mat-form-field>
+                <mat-label>Novo nome</mat-label>
+                <input matInput [(ngModel)]="newName" type="text">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="submitNewName()">Submeter</button>
+            <div class="spinner">
+                <mat-progress-spinner *ngIf="loading" [color]="color" [mode]="mode">
+                </mat-progress-spinner>
+                <p *ngIf="membUpdated" class="success">Nome atualizado! </p>
+                <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel class="expansion2">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Editar membro responsável
+                </mat-panel-title>
+            </mat-expansion-panel-header>
             <button mat-button [matMenuTriggerFor]="membMenu">{{ selectedMemb }}</button>
             <mat-menu #membMenu="matMenu">
-                <button *ngFor="let membro of member_names let i = index" 
-                mat-menu-item (click)="selectMemb(membro, i)">{{ membro }}</button>
-              </mat-menu>
-              <button mat-raised-button color="primary" (click)="submitNewRes()">Submeter</button>
-              <div class="spinner">
-                  <mat-progress-spinner
-                    *ngIf = "loading"
-                    [color]="color"
-                    [mode]="mode">
-                  </mat-progress-spinner>
-                  <p *ngIf="resUpdated" class="success">Membro responsável atualizado! </p>
-                  <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
-                </div>
-    </mat-expansion-panel>
+                <button *ngFor="let membro of member_names let i = index" mat-menu-item
+                    (click)="selectMemb(membro, i)">{{ membro }}</button>
+            </mat-menu>
+            <button mat-raised-button color="primary" (click)="submitNewRes()">Submeter</button>
+            <div class="spinner">
+                <mat-progress-spinner *ngIf="loading" [color]="color" [mode]="mode">
+                </mat-progress-spinner>
+                <p *ngIf="resUpdated" class="success">Membro responsável atualizado! </p>
+                <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
+            </div>
+        </mat-expansion-panel>
 
-    <mat-expansion-panel class="expansion2">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Atualizar orientador
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>ID do orientador antigo: {{ advisorId }}</p>
-        <mat-form-field>
-            <mat-label>Nome do novo </mat-label>
-            <input matInput [(ngModel)]="newAdvName" type="text">
-        </mat-form-field>
-        <mat-form-field>
-        <mat-label>Email do novo </mat-label>
-        <input matInput [(ngModel)]="newAdvEmail" type="text">
-    </mat-form-field>
-        <button mat-raised-button color="primary" (click)="submitNewAdv()">Submeter</button>
-        <div class="spinner">
-            <mat-progress-spinner
-              *ngIf = "loading"
-              [color]="color"
-              [mode]="mode">
-            </mat-progress-spinner>
-            <p *ngIf="advUpdated" class="success">Orientador atualizado! </p>
-            <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
-          </div>
-    </mat-expansion-panel>
+        <mat-expansion-panel class="expansion2">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Atualizar orientador
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>ID do orientador antigo: {{ advisorId }}</p>
+            <mat-form-field>
+                <mat-label>Nome do novo </mat-label>
+                <input matInput [(ngModel)]="newAdvName" type="text">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email do novo </mat-label>
+                <input matInput [(ngModel)]="newAdvEmail" type="text">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="submitNewAdv()">Submeter</button>
+            <div class="spinner">
+                <mat-progress-spinner *ngIf="loading" [color]="color" [mode]="mode">
+                </mat-progress-spinner>
+                <p *ngIf="advUpdated" class="success">Orientador atualizado! </p>
+                <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
+            </div>
+        </mat-expansion-panel>
 
-    <mat-expansion-panel class="expansion2">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Atualizar status
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <p><mat-slide-toggle name="status" [(ngModel)]="status" color="primary">Ativo</mat-slide-toggle></p>
-        <button class="but" mat-raised-button color="primary" (click)="submitNewStatus()">Submeter</button>
+        <mat-expansion-panel class="expansion2">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Atualizar status
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>Estado atual: {{ act_state ? 'Ativo' : 'Inativo' }}</p>
+            <p><mat-slide-toggle name="status" [(ngModel)]="status" color="primary">{{ status ? 'Ativo' : 'Inativo' }}</mat-slide-toggle></p>
+            <button class="but" mat-raised-button color="primary" (click)="submitNewStatus()">Submeter</button>
+            <div class="spinner">
+                <mat-progress-spinner *ngIf="loading" [color]="color" [mode]="mode">
+                </mat-progress-spinner>
+                <p *ngIf="statUpdated" class="success">Status atualizado! </p>
+                <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
+            </div>
+        </mat-expansion-panel>
+    </div>
+    <div class="but">
+        <button mat-raised-button (click)="goBack()">Voltar</button>
         <div class="spinner">
-            <mat-progress-spinner
-              *ngIf = "loading"
-              [color]="color"
-              [mode]="mode">
-            </mat-progress-spinner>
-            <p *ngIf="statUpdated" class="success">Status atualizado! </p>
-            <p *ngIf="errorAt" class="erro">Erro ao atualizar. Por favor, tente novamente! </p>
-          </div>
-    </mat-expansion-panel>
-</div>
-<div class="but">
-<button mat-raised-button (click)="goBack()">Voltar</button>
-</div>
+        <mat-progress-spinner *ngIf="loading2" [color]="color" [mode]="mode">
+        </mat-progress-spinner>
+        </div>
+    </div>
 </body>

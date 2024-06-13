@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { UsersDataService } from '../services/users-data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 @Component({
@@ -10,7 +10,7 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
   styleUrl: './adm-updater.component.css'
 })
 export class AdmUpdaterComponent {
-  constructor(private userDataService: UsersDataService, private router: ActivatedRoute, private location: Location) { }
+  constructor(private userDataService: UsersDataService, private router: ActivatedRoute, private route: Router) { }
   json: any;
   advisorId = '';
   id = '';
@@ -20,6 +20,7 @@ export class AdmUpdaterComponent {
   newName = '';
   newAdvName = '';
   newAdvEmail = '';
+  act_state: boolean = false;
   status: boolean = false;
   member_names: string[] = [];
   member_emails: string[] = [];
@@ -28,6 +29,7 @@ export class AdmUpdaterComponent {
   mode: ProgressSpinnerMode = 'indeterminate';
   errorAt: boolean = false;
   loading: boolean = false;
+  loading2: boolean = false;
   advUpdated: boolean = false;
   membUpdated: boolean = false;
   statUpdated: boolean = false;
@@ -36,13 +38,13 @@ export class AdmUpdaterComponent {
   bearer = String(this.router.snapshot.paramMap.get('bearer'));
   ngOnInit() {
     this.json = this.userDataService.getTeamsDetails();
-    console.log(this.json);
     // Dados do json
     this.id = this.json["teamId"];
     this.advisorId = this.json["advisorId"];
     this.name = this.json["teamName"];
     this.membros = this.json["members"];
     this.notas = this.json["grades"];
+    this.act_state = this.json["active"];
 
     for (let member of this.membros) {
       this.member_names.push(member["name"]);
@@ -119,14 +121,15 @@ export class AdmUpdaterComponent {
 
   submitNewStatus() {
     this.statUpdated = false;
+    this.loading = true;
     let json = {
       "isActive": this.status
     }
     const path = '/adm/teams/' + this.id + '/status';
-    console.log('Status');
     this.userDataService.handlePut(this.bearer, path, json).subscribe(
       (response) => {
         this.errorAt = false;
+        this.loading = false;
         this.statUpdated = true;
         console.log(response);
       },
@@ -137,6 +140,7 @@ export class AdmUpdaterComponent {
           this.loading = false;
         }
         else {
+          this.loading = false;
           this.errorAt = true;
           console.log(error);
         }
@@ -169,7 +173,18 @@ export class AdmUpdaterComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.loading2 = true;
+    this.userDataService.handleGet(this.bearer, '/adm/teams/' + this.id).subscribe(
+      (response) => {
+        this.loading2 = false;    
+        this.userDataService.setTeamsDetails(response);
+        this.route.navigate(['/adm-proj-details', this.bearer]);
+      },
+      (error) => {                              
+        this.loading2 = false;
+        console.log(error);
+      }
+    );
   }
 
 }

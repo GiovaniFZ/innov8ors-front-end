@@ -56,7 +56,6 @@ export class AdmProjDetailsComponent {
   selectPhase(selectedPhase: string, posicaoPhase: number){
     this.selectedPhase = selectedPhase;
     this.posicaoPhase = posicaoPhase + 1;
-    console.log(posicaoPhase)
   }
 
   ngOnInit(){
@@ -67,7 +66,6 @@ export class AdmProjDetailsComponent {
     this.membros = this.json["members"];
     this.notas = this.json["grades"];
     this.active = this.json["active"];
-    console.log(this.json);
     for (let member of this.membros) {
       this.member_emails.push(member["email"]);
       this.member_names.push(member["name"]);
