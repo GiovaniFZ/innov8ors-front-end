@@ -36,6 +36,10 @@
             </mat-accordion>
             <div class="bot">
                 <button mat-raised-button color="fetincolor" (click)="goBack()">Voltar</button>
+                <div class="spinner">
+                    <mat-progress-spinner *ngIf="loading" [color]="color" [mode]="mode">
+                    </mat-progress-spinner>
+                    </div>
             </div>
         </div>
 

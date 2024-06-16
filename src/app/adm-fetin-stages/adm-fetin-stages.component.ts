@@ -8,6 +8,7 @@ import { UsersDataService } from '../services/users-data.service';
 import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinner, ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-adm-fetin-stages',
@@ -18,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule, 
     FormsModule,
     MatInput,
+    MatProgressSpinner,
     MatIconModule],
   templateUrl: './adm-fetin-stages.component.html',
   styleUrl: './adm-fetin-stages.component.css',
@@ -32,6 +34,13 @@ export class AdmFetinStagesComponent {
   startDate: String[] = [];
   endDate: String[] = [];
 
+  // Progress Spinner
+  color = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
+  errorAt: boolean = false;
+  loading: boolean = false;
+  loading2: boolean = false;
+
   ngOnInit(){
     for (var i in this.phases) {
       this.id[i] = this.phases[i]["id"];
@@ -42,6 +51,21 @@ export class AdmFetinStagesComponent {
   }
 
   goBack(){
+    /*
+    this.loading2 = true;
+    this.userDataService.handleGet(this.bearer, '/adm/teams/'+ this.id).subscribe(
+      (response) => {
+        this.loading2 = false;    
+        this.userDataService.setTeamsDetails(response);
+        this.router.navigate(['/adm/teams', this.bearer, this.id]);
+      },
+      (error) => {                              
+        this.loading2 = false;
+        console.log(error);
+      }
+    );
+    */
+    
     this.location.back();
   }
 }

@@ -24,6 +24,7 @@ import { AdmFetinStagesComponent } from './adm-fetin-stages/adm-fetin-stages.com
 import { AdmUpdaterComponent } from './adm-updater/adm-updater.component';
 import { AdmProjDetailsComponent } from './adm-proj-details/adm-proj-details.component';
 import { AdmComponent } from './adm-teams/adm-teams.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const materialModules = [
   CommonModule,
@@ -55,7 +56,8 @@ const materialModules = [
   declarations: [ AppComponent, AuthComponent, ProjCreatorComponent, 
       IntermScreenComponent, HelpPageComponent, 
       AdmUpdaterComponent, ProjDetailsComponent, AdmProjDetailsComponent,
-      AdmComponent ],
+      AdmComponent,
+      ChangePasswordComponent ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

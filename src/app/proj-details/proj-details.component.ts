@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location, CommonModule } from '@angular/common';
 import { UsersDataService } from '../services/users-data.service';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-proj-details',
@@ -9,7 +10,7 @@ import { UsersDataService } from '../services/users-data.service';
   styleUrl: './proj-details.component.css'
 })
 export class ProjDetailsComponent {
-  constructor(private route: ActivatedRoute, private location: Location, private userDataService: UsersDataService) { }
+  constructor(private route: ActivatedRoute, private location: Location, private userDataService: UsersDataService, private router: Router) { }
   panelOpenState: boolean = false;
   id = this.route.snapshot.paramMap.get('i');
   json:any;
@@ -22,6 +23,14 @@ export class ProjDetailsComponent {
   member_names:string[] = [];
   phaseNames = [];
   active = false;
+
+  // Progress Spinner
+  color = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
+  errorAt: boolean = false;
+  loading: boolean = false;
+
+  bearer = String(this.route.snapshot.paramMap.get('bearer'));
 
   ngOnInit(){
     this.json = this.userDataService.getTeamsDetails();
@@ -44,6 +53,20 @@ export class ProjDetailsComponent {
   }
 
   goBack(){
+    /*
+    this.loading = true;
+    this.userDataService.handleGet(this.bearer, '/advisor/'+ this.id).subscribe(
+      (response) => {
+        this.loading = false;    
+        this.userDataService.setTeamsDetails(response);
+        this.router.navigate(['/advisor', this.bearer, this.id]);
+      },
+      (error) => {                              
+        this.loading = false;
+        console.log(error);
+      }
+    );
+    */
     this.location.back();
   }
 }

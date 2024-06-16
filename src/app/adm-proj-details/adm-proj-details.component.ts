@@ -31,6 +31,7 @@ export class AdmProjDetailsComponent {
   // Controle de errors
   isEditing: boolean = false;
   loading:boolean = false;
+  loading2: boolean = false;
   errorAt:boolean = false;
   memAdded:boolean = false;
   membDeleted:boolean = false;
@@ -81,7 +82,22 @@ export class AdmProjDetailsComponent {
   }
 
   goBack(){
-    this.location.back();
+    /*
+    this.loading2 = true;
+    this.userDataService.handleGet(this.bearer, '/adm/teams/'+ this.id).subscribe(
+      (response) => {
+        this.loading2 = false;    
+        this.userDataService.setTeamsDetails(response);
+        this.route.navigate(['/adm/teams/', this.bearer, this.id]);
+      },
+      (error) => {                              
+        this.loading2 = false;
+        console.log(error);
+      }
+    );
+    */
+    
+    //this.location.back();
   }
 
   edit(){

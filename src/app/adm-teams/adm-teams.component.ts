@@ -18,6 +18,7 @@ export class AdmComponent {
   bearer = String(this.route.snapshot.paramMap.get('bearer'));
   teams = this.userDataService.getTeamsDetails();
   loading: boolean = false;
+  loading2: boolean = false;
   teams_names:any;
   teamIds:any;
   errorAt:boolean = false;
@@ -83,6 +84,21 @@ export class AdmComponent {
   }
 
   goBack(){
+    /*
+    this.loading2 = true;
+    this.userDataService.handleGet(this.bearer, '/adm/teams/'+ this.id).subscribe(
+      (response) => {
+        this.loading2 = false;    
+        this.userDataService.setTeamsDetails(response);
+        this.router.navigate(['/interm-screen', this.bearer, this.id]);
+      },
+      (error) => {                              
+        this.loading2 = false;
+        console.log(error);
+      }
+    );
+    */
+    
     this.location.back();
   }
 

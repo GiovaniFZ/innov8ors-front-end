@@ -94,3 +94,10 @@ expansion ul{
   text-align: center;
   margin-top: 4%;
 }
+
+.spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4%;
+}

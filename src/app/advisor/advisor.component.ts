@@ -22,6 +22,7 @@ export class AdvisorComponent {
   bearer = String(this.route.snapshot.paramMap.get('bearer'));
   teams = this.userDataService.getTeams();
   loading: boolean = false;
+  loading2: boolean = false;
   // Propriedades do Progress
   mode: ProgressSpinnerMode = 'indeterminate';
   color = 'primary';
@@ -63,6 +64,21 @@ export class AdvisorComponent {
   }
 
   goBack(){
+    /*
+    this.loading2 = true;
+    this.userDataService.handleGet(this.bearer, '/advisor/'+ this.id).subscribe(
+      (response) => {
+        this.loading2 = false;    
+        this.userDataService.setTeamsDetails(response);
+        this.router.navigate(['/interm-screen', this.bearer, this.id]);
+      },
+      (error) => {                              
+        this.loading2 = false;
+        console.log(error);
+      }
+    );
+    */
+    
     this.location.back();
   }
 }
