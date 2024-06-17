@@ -73,7 +73,7 @@ export class AdmComponent {
       (response) => {    
         this.loading = false;
         this.userDataService.setFetinStages(response["phases"]);
-        this.router.navigate(['/adm-fetinStages']);
+        this.router.navigate(['/adm-fetinStages', this.bearer, this.name]);
       },
       (error) => {                              
         this.loading = false;
@@ -84,21 +84,6 @@ export class AdmComponent {
   }
 
   goBack(){
-    /*
-    this.loading2 = true;
-    this.userDataService.handleGet(this.bearer, '/adm/teams/'+ this.id).subscribe(
-      (response) => {
-        this.loading2 = false;    
-        this.userDataService.setTeamsDetails(response);
-        this.router.navigate(['/interm-screen', this.bearer, this.id]);
-      },
-      (error) => {                              
-        this.loading2 = false;
-        console.log(error);
-      }
-    );
-    */
-    
     this.location.back();
   }
 

@@ -49,7 +49,7 @@ export class AdvisorComponent {
       (response) => {    
         this.loading = false;
         this.userDataService.setTeamsDetails(response);
-        this.router.navigate(['/proj-details', this.id[i]])
+        this.router.navigate(['/proj-details', this.id[i], this.phaseName, this.bearer])
       },
       (error) => {                              
         this.loading = false;
@@ -59,26 +59,15 @@ export class AdvisorComponent {
     );
   }
 
+  changePass(){
+    this.router.navigate(['change-password']);
+  }
+
   panelOpened() {
     this.panelOpenState = true;
   }
 
-  goBack(){
-    /*
-    this.loading2 = true;
-    this.userDataService.handleGet(this.bearer, '/advisor/'+ this.id).subscribe(
-      (response) => {
-        this.loading2 = false;    
-        this.userDataService.setTeamsDetails(response);
-        this.router.navigate(['/interm-screen', this.bearer, this.id]);
-      },
-      (error) => {                              
-        this.loading2 = false;
-        console.log(error);
-      }
-    );
-    */
-    
+  goBack(){    
     this.location.back();
   }
 }

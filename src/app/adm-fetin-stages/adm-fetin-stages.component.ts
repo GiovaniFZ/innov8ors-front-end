@@ -25,7 +25,7 @@ import { MatProgressSpinner, ProgressSpinnerMode } from '@angular/material/progr
   styleUrl: './adm-fetin-stages.component.css',
 })
 export class AdmFetinStagesComponent {
-  constructor(private userDataService: UsersDataService, private location: Location){}
+  constructor(private userDataService: UsersDataService, private route: Router, private router: ActivatedRoute){}
   panelOpenState: boolean = false;
 
   phases = this.userDataService.getFetinStages();
@@ -33,6 +33,8 @@ export class AdmFetinStagesComponent {
   id: number[] = [];
   startDate: String[] = [];
   endDate: String[] = [];
+  bearer = String(this.router.snapshot.paramMap.get('bearer'));
+  name = this.router.snapshot.paramMap.get('name');
 
   // Progress Spinner
   color = 'primary';
@@ -51,21 +53,17 @@ export class AdmFetinStagesComponent {
   }
 
   goBack(){
-    /*
     this.loading2 = true;
-    this.userDataService.handleGet(this.bearer, '/adm/teams/'+ this.id).subscribe(
+    this.userDataService.handleGet(this.bearer, '/adm/teams').subscribe(
       (response) => {
         this.loading2 = false;    
         this.userDataService.setTeamsDetails(response);
-        this.router.navigate(['/adm/teams', this.bearer, this.id]);
+        this.route.navigate(['adm-teams', this.bearer, this.name]);
       },
       (error) => {                              
         this.loading2 = false;
         console.log(error);
       }
     );
-    */
-    
-    this.location.back();
   }
 }

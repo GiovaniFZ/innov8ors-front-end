@@ -14,6 +14,10 @@ export class ChangePasswordComponent {
   passUpdated: boolean = false;
   color = 'primary';
   mode: ProgressSpinnerMode = 'indeterminate';
+  // Strings do component
+  actPass = '';
+  newPass = '';
+  newPassConf = '';
   
   goBack(){
     this.location.back();

@@ -13,6 +13,7 @@ export class ProjDetailsComponent {
   constructor(private route: ActivatedRoute, private location: Location, private userDataService: UsersDataService, private router: Router) { }
   panelOpenState: boolean = false;
   id = this.route.snapshot.paramMap.get('i');
+  phaseName = this.route.snapshot.paramMap.get('phaseName');
   json:any;
   name = '';
   membros = [];
@@ -53,20 +54,17 @@ export class ProjDetailsComponent {
   }
 
   goBack(){
-    /*
     this.loading = true;
-    this.userDataService.handleGet(this.bearer, '/advisor/'+ this.id).subscribe(
+    this.userDataService.handleGet(this.bearer, '/advisor').subscribe(
       (response) => {
         this.loading = false;    
         this.userDataService.setTeamsDetails(response);
-        this.router.navigate(['/advisor', this.bearer, this.id]);
+        this.router.navigate(['/advisor', this.phaseName, this.bearer]);
       },
       (error) => {                              
         this.loading = false;
         console.log(error);
       }
     );
-    */
-    this.location.back();
   }
 }
