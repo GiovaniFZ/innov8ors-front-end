@@ -13,9 +13,10 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 export class AdmComponent {
   panelOpenState: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private userDataService: UsersDataService, private location: Location) {}
+  constructor(private router: Router, private route: ActivatedRoute, private userDataService: UsersDataService) {}
   name = this.route.snapshot.paramMap.get('name');
   bearer = String(this.route.snapshot.paramMap.get('bearer'));
+  role = '[ROLE_ADMIN]';
   teams = this.userDataService.getTeamsDetails();
   loading: boolean = false;
   loading2: boolean = false;
@@ -84,7 +85,9 @@ export class AdmComponent {
   }
 
   goBack(){
-    this.location.back();
+    this.loading2 = true;
+    this.router.navigate(['interm-screen', this.bearer, this.name, this.role]);
+    this.loading2 = false;
   }
 
 }

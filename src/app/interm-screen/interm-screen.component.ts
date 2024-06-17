@@ -27,8 +27,7 @@ export class IntermScreenComponent {
       this.loading = true;
       this.errorMessage = "";
       this.errorAt = false;
-      this.userDataService.handleAdvisor(bearer)
-        .subscribe(
+      this.userDataService.handleAdvisor(bearer).subscribe(
           (response) => {    
             this.loading = false;
             phaseName = response["fetinPhase"]["phaseName"];
