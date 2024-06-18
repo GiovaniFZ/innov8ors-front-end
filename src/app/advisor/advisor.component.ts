@@ -60,7 +60,7 @@ export class AdvisorComponent {
   }
 
   changePass(){
-    this.router.navigate(['change-password']);
+    this.router.navigate(['change-password', this.phaseName, this.bearer]);
   }
 
   panelOpened() {

@@ -14,6 +14,7 @@ export class ProjDetailsComponent {
   panelOpenState: boolean = false;
   id = this.route.snapshot.paramMap.get('i');
   phaseName = this.route.snapshot.paramMap.get('phaseName');
+  role = this.route.snapshot.paramMap.get('role');
   json:any;
   name = '';
   membros = [];
@@ -55,16 +56,32 @@ export class ProjDetailsComponent {
 
   goBack(){
     this.loading = true;
-    this.userDataService.handleGet(this.bearer, '/advisor').subscribe(
-      (response) => {
-        this.loading = false;    
-        this.userDataService.setTeamsDetails(response);
-        this.router.navigate(['/advisor', this.phaseName, this.bearer]);
-      },
-      (error) => {                              
-        this.loading = false;
-        console.log(error);
-      }
-    );
+    if(this.role == '[ROLE_ADVISOR]'){
+      this.userDataService.handleGet(this.bearer, '/advisor').subscribe(
+        (response) => {
+          this.loading = false;    
+          this.userDataService.setTeamsDetails(response);
+          this.router.navigate(['/advisor', this.phaseName, this.bearer]);
+        },
+        (error) => {                              
+          this.loading = false;
+          console.log(error);
+        }
+      );
+    }
+
+    else {
+      this.userDataService.handleGet(this.bearer, '/member').subscribe(
+        (response) => {
+          this.loading = false;    
+          this.userDataService.setTeamsDetails(response);
+          this.router.navigate(['/student', this.phaseName, this.bearer]);
+        },
+        (error) => {                              
+          this.loading = false;
+          console.log(error);
+        }
+      );
+    }
   }
 }

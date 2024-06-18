@@ -21,6 +21,7 @@ export class StudentComponent {
   teams = this.userDataService.getTeams();
   phaseName = String(this.route.snapshot.paramMap.get('phaseName'));
   bearer = String(this.route.snapshot.paramMap.get('bearer'));
+  role = '[ROLE_MEMBER]';
   loading: boolean = false;
   loading2: boolean = false;
   errorAt:boolean = false;
@@ -50,7 +51,7 @@ export class StudentComponent {
       (response) => {    
         this.loading = false;
         this.userDataService.setTeamsDetails(response);
-        this.router.navigate(['/proj-details', this.id[i]])
+        this.router.navigate(['/proj-details', this.id[i], this.bearer, this.phaseName])
       },
       (error) => {                              
         this.loading = false;
@@ -74,7 +75,12 @@ export class StudentComponent {
       }
     );
     */
-    this.location.back();
+
+    this.loading2 = true;
+    this.router.navigate(['interm-screen', this.bearer, this.name, this.role]);
+    this.loading2 = false;
+
+    //this.location.back();
   }
 
 }
