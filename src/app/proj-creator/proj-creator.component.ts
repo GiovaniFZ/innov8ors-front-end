@@ -4,6 +4,7 @@ import { UsersDataService } from '../services/users-data.service';
 import { HttpResponse } from '@angular/common/http';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { Location } from '@angular/common';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-proj-creator',
@@ -28,6 +29,7 @@ export class ProjCreatorComponent {
   not_created: boolean = false;
   mode: ProgressSpinnerMode = 'indeterminate';
   color = 'primary';
+  dataExc: any;
 
   constructor(private userDataService: UsersDataService, private router: ActivatedRoute, private location: Location) {}
   bearer = String(this.router.snapshot.paramMap.get('bearer'));
@@ -73,6 +75,29 @@ export class ProjCreatorComponent {
       }
     );
   }
+  onFileChange(event: any){
+    // Converte o XLSX em JSON
+    let file = event.target.files[0];
+    let fileReader = new FileReader();
+    fileReader.readAsBinaryString(file);
+    fileReader.onload = (e) =>{
+      const workbook: XLSX.WorkBook = XLSX.read(fileReader.result, { type: 'binary' });
+      const sheetnames = workbook.SheetNames;
+      this.dataExc = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames[0]])
+      // Preenchendo os dados do XLSX
+      this.tituloProj = this.dataExc[0]["Nome"];
+      this.membro1 = this.dataExc[0]["Membro 1"];
+      this.membro2 = this.dataExc[0]["Membro 2"];
+      this.membro3 = this.dataExc[0]["Membro 3"];
+      this.membro4 = this.dataExc[0]["Membro 4"];
+      this.email1 = this.dataExc[0]["EmailMem1"];
+      this.email2 = this.dataExc[0]["EmailMem2"];
+      this.email3 = this.dataExc[0]["EmailMem3"];
+      this.email4 = this.dataExc[0]["EmailMem4"];
+      this.advisorName = this.dataExc[0]["Orientador"];
+      this.emailAdv = this.dataExc[0]["OrientEmail"];
+  }
+}
 
   goBack(){
     this.location.back();

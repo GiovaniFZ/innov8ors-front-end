@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UsersDataService } from '../services/users-data.service';
-import { Location } from '@angular/common';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 
@@ -24,6 +23,7 @@ export class AdmComponent {
   teamIds:any;
   errorAt:boolean = false;
   errorMessage: string = '';
+  dataExc:any;
 
   // Progress Spinner
   color = 'primary';

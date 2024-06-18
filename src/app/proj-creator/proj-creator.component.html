@@ -48,6 +48,8 @@
             <input matInput [(ngModel)]="emailAdv">
         </mat-form-field>
         <button mat-raised-button color="fetincolor" (click)="saveProject()">Salvar</button>
+        <label for="selecao-arquivo" class="custom-selecao">Importar planilha</label>
+        <input id="selecao-arquivo" type="file" (change)="onFileChange($event)" accept=".xlsx, .xls" hidden >
         <div class="endPage">
         <button mat-raised-button color="fetincolor" (click)="goBack()">Voltar</button>
         </div>
