@@ -29,7 +29,7 @@ export class UsersDataService {
       'Authorization': `Bearer ${bearer}`
     });
 
-    return this.http.post<any>(this.urlBase + '/adm/teams/register', jsonData, {headers:headers})
+    return this.http.post<any>(this.urlBase + '/adm/teams/register', jsonData, {headers:headers});
   }
 
   handleAdvisor(bearer:string){

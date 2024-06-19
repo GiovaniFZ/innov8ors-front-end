@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UsersDataService } from '../services/users-data.service';
-import { HttpResponse } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { Location } from '@angular/common';
 import * as XLSX from 'xlsx';
@@ -65,7 +65,7 @@ export class ProjCreatorComponent {
     console.log('json sendo salvo: ', jsonProj);
     this.loading = true;
     try {
-      const response = await this.userDataService.tryCreate(jsonProj, this.bearer).toPromise();
+      const response = await lastValueFrom(this.userDataService.tryCreate(jsonProj, this.bearer));
       console.log('Response: ', response);
       if (response.status === 201) {
         this.attempt = true;
@@ -82,6 +82,7 @@ export class ProjCreatorComponent {
     } finally {
       this.loading = false;
     }
+    return new Promise((resolve) => setTimeout(resolve, 1000)); // Espera 1 segundo
   }
 
   onFileChange(event: any) {
