@@ -54,7 +54,7 @@
         <button mat-raised-button color="fetincolor" (click)="goBack()">Voltar</button>
         </div>
         <div class="endPage">
-        <p class="textInfo" *ngIf="attempt">Projeto criado com sucesso!</p>
+        <p class="textInfoSucc" *ngIf="attempt">Projeto criado com sucesso!</p>
         <p class="textInfo" *ngIf="not_created">Erro ao criar o projeto!</p>
         <mat-progress-spinner
         *ngIf="loading"

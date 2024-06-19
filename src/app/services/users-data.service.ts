@@ -25,7 +25,6 @@ export class UsersDataService {
   }
 
   tryCreate(jsonData:any, bearer:string):Observable<any>{
-    console.log('bearer', bearer)
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${bearer}`
     });

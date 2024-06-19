@@ -38,6 +38,10 @@ body{
     color: red;
   }
 
+  .textInfoSucc{
+    color: green;
+  }
+
   .endPage{
     margin-top: 5%;
   }

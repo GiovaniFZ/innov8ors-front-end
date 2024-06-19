@@ -21,21 +21,23 @@ export class ProjCreatorComponent {
   email3: string = '';
   membro4: string = '';
   email4: string = '';
-  advisorName:string = '';
-  emailAdv:string = '';
+  advisorName: string = '';
+  emailAdv: string = '';
   loading: boolean = false;
-  errorMessage:string = '';
+  errorMessage: string = '';
   attempt: boolean = false;
   not_created: boolean = false;
   mode: ProgressSpinnerMode = 'indeterminate';
   color = 'primary';
   dataExc: any;
 
-  constructor(private userDataService: UsersDataService, private router: ActivatedRoute, private location: Location) {}
+  constructor(private userDataService: UsersDataService, private router: ActivatedRoute, private location: Location) { }
   bearer = String(this.router.snapshot.paramMap.get('bearer'));
 
-  saveProject(){
-    let jsonProj ={
+  async saveProject() {
+    this.attempt = false;
+    this.not_created = false;
+    let jsonProj = {
       "teamName": this.tituloProj,
       "members": [
         {
@@ -44,7 +46,7 @@ export class ProjCreatorComponent {
         },
         {
           "name": this.membro2,
-          "email": this.membro3
+          "email": this.email2
         },
         {
           "name": this.membro3,
@@ -60,46 +62,58 @@ export class ProjCreatorComponent {
         "email": this.emailAdv
       }
     }
+    console.log('json sendo salvo: ', jsonProj);
     this.loading = true;
-    this.userDataService.tryCreate(jsonProj, this.bearer).subscribe(
-      (response: HttpResponse<any>) =>{
-        console.log('Response: ', response);
-      },
-      (error) => { // Angular trata Status 201 como erro
-        if(error.status === 201){
-          this.attempt = true;
-        }else{ // Projeto não criado
-          this.not_created = true;
-        }
-        this.loading = false;
+    try {
+      const response = await this.userDataService.tryCreate(jsonProj, this.bearer).toPromise();
+      console.log('Response: ', response);
+      if (response.status === 201) {
+        this.attempt = true;
+      } else {
+        this.not_created = true;
       }
-    );
+    } catch (error: any) {
+      if (error.status === 201) {
+        this.attempt = true;
+      } else {
+        console.error('Erro ao salvar projeto:', error);
+        this.not_created = true;
+      }
+    } finally {
+      this.loading = false;
+    }
   }
-  onFileChange(event: any){
+
+  onFileChange(event: any) {
     // Converte o XLSX em JSON
     let file = event.target.files[0];
     let fileReader = new FileReader();
     fileReader.readAsBinaryString(file);
-    fileReader.onload = (e) =>{
+    fileReader.onload = async (e) => {
       const workbook: XLSX.WorkBook = XLSX.read(fileReader.result, { type: 'binary' });
       const sheetnames = workbook.SheetNames;
       this.dataExc = XLSX.utils.sheet_to_json(workbook.Sheets[sheetnames[0]])
       // Preenchendo os dados do XLSX
-      this.tituloProj = this.dataExc[0]["Nome"];
-      this.membro1 = this.dataExc[0]["Membro 1"];
-      this.membro2 = this.dataExc[0]["Membro 2"];
-      this.membro3 = this.dataExc[0]["Membro 3"];
-      this.membro4 = this.dataExc[0]["Membro 4"];
-      this.email1 = this.dataExc[0]["EmailMem1"];
-      this.email2 = this.dataExc[0]["EmailMem2"];
-      this.email3 = this.dataExc[0]["EmailMem3"];
-      this.email4 = this.dataExc[0]["EmailMem4"];
-      this.advisorName = this.dataExc[0]["Orientador"];
-      this.emailAdv = this.dataExc[0]["OrientEmail"];
+      for (let i in this.dataExc) {
+        this.attempt = false;
+        this.not_created = false;
+        this.tituloProj = this.dataExc[i]["Nome"];
+        this.membro1 = this.dataExc[i]["Membro 1"];
+        this.membro2 = this.dataExc[i]["Membro 2"];
+        this.membro3 = this.dataExc[i]["Membro 3"];
+        this.membro4 = this.dataExc[i]["Membro 4"];
+        this.email1 = this.dataExc[i]["EmailMem1"];
+        this.email2 = this.dataExc[i]["EmailMem2"];
+        this.email3 = this.dataExc[i]["EmailMem3"];
+        this.email4 = this.dataExc[i]["EmailMem4"];
+        this.advisorName = this.dataExc[i]["Orientador"];
+        this.emailAdv = this.dataExc[i]["OrientEmail"];
+        await this.saveProject();
+      }
+    }
   }
-}
 
-  goBack(){
+  goBack() {
     this.location.back();
   }
 
