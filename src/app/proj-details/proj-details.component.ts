@@ -55,33 +55,6 @@ export class ProjDetailsComponent {
   }
 
   goBack(){
-    this.loading = true;
-    if(this.role == '[ROLE_ADVISOR]'){
-      this.userDataService.handleGet(this.bearer, '/advisor').subscribe(
-        (response) => {
-          this.loading = false;    
-          this.userDataService.setTeamsDetails(response);
-          this.router.navigate(['/advisor', this.phaseName, this.bearer]);
-        },
-        (error) => {                              
-          this.loading = false;
-          console.log(error);
-        }
-      );
-    }
-
-    else {
-      this.userDataService.handleGet(this.bearer, '/member').subscribe(
-        (response) => {
-          this.loading = false;    
-          this.userDataService.setTeamsDetails(response);
-          this.router.navigate(['/student', this.phaseName, this.bearer]);
-        },
-        (error) => {                              
-          this.loading = false;
-          console.log(error);
-        }
-      );
-    }
+    this.location.back();
   }
 }

@@ -109,6 +109,18 @@ export class ProjCreatorComponent {
         this.advisorName = this.dataExc[i]["Orientador"];
         this.emailAdv = this.dataExc[i]["OrientEmail"];
         await this.saveProject();
+        // Limpando buffer para salvar corretamente
+        this.tituloProj = '';
+        this.membro1 = '';
+        this.membro2 = '';
+        this.membro3 = '';
+        this.membro4 ='';
+        this.email1 = '';
+        this.email2 = '';
+        this.email3 = '';
+        this.email4 = '';
+        this.advisorName = '';
+        this.emailAdv = '';
       }
     }
   }
