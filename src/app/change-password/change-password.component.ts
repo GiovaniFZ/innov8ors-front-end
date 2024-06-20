@@ -26,8 +26,33 @@ export class ChangePasswordComponent {
   mode: ProgressSpinnerMode = 'indeterminate';
   // Strings do component
   actPass = '';
+  actPass2 = '';
   newPass = '';
   newPassConf = '';
+
+  changePass(){
+    let json = {
+      "newPassword": this.newPass
+    }
+    this.loading = true;
+    this.userDataService.handlePost(this.bearer, '/advisor/change-password', json).subscribe(
+      (response) =>{
+        this.passUpdated = true;
+        this.loading = false;
+        console.log(response);
+      },
+      (error)=>{
+        if(error.status === 200){
+          this.passUpdated = true;
+          this.loading = false;
+        }else{
+          this.errorAt = true;
+          this.loading = false;
+          console.log(error);
+        }
+      }
+    )
+  }
   
   goBack(){
     this.loading2 = true;

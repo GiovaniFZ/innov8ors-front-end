@@ -62,11 +62,10 @@ export class ProjCreatorComponent {
         "email": this.emailAdv
       }
     }
-    console.log('json sendo salvo: ', jsonProj);
+    
     this.loading = true;
     try {
       const response = await lastValueFrom(this.userDataService.tryCreate(jsonProj, this.bearer));
-      console.log('Response: ', response);
       if (response.status === 201) {
         this.attempt = true;
       } else {

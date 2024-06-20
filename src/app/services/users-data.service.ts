@@ -28,7 +28,7 @@ export class UsersDataService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${bearer}`
     });
-
+    console.log('jsonData: ', jsonData);
     return this.http.post<any>(this.urlBase + '/adm/teams/register', jsonData, {headers:headers});
   }
 
