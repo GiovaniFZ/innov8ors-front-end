@@ -22,6 +22,7 @@ export class StudentComponent {
   phaseName = String(this.route.snapshot.paramMap.get('phaseName'));
   bearer = String(this.route.snapshot.paramMap.get('bearer'));
   role = '[ROLE_MEMBER]';
+  role2 = '/member/'
   loading: boolean = false;
   loading2: boolean = false;
   errorAt:boolean = false;
@@ -61,26 +62,13 @@ export class StudentComponent {
   }
 
   goBack(){
-    /*
-    this.loading2 = true;
-    this.userDataService.handleGet(this.bearer, '/member/'+ this.id).subscribe(
-      (response) => {
-        this.loading2 = false;    
-        this.userDataService.setTeamsDetails(response);
-        this.router.navigate(['/interm-screen', this.bearer, this.name]);
-      },
-      (error) => {                              
-        this.loading2 = false;
-        console.log(error);
-      }
-    );
-    */
-
     this.loading2 = true;
     this.router.navigate(['interm-screen', this.bearer, this.name, this.role]);
     this.loading2 = false;
+  }
 
-    //this.location.back();
+  changePass(){
+    this.router.navigate(['change-password', this.role2, this.bearer]);
   }
 
 }

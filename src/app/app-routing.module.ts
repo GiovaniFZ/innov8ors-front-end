@@ -25,7 +25,7 @@ const routes: Routes = [
     { path: 'proj-details/:i/:phaseName/:bearer', component:ProjDetailsComponent },
     { path: 'adm-fetinStages/:bearer/:name', component:AdmFetinStagesComponent },
     { path:'adm-updater/:bearer', component:AdmUpdaterComponent },
-    { path: 'change-password/:phaseName/:bearer', component: ChangePasswordComponent }
+    { path: 'change-password/:role2/:bearer', component: ChangePasswordComponent }
 ];
 
 @NgModule({

@@ -42,6 +42,12 @@ body{
   text-align: center;
 }
 
+.bot2{
+  display: flex;
+  justify-content: flex-end;
+  text-align: center;
+}
+
 .spinner{
   display: flex;
   justify-content: center;

@@ -32,6 +32,7 @@ export class AdvisorComponent {
   advisorName: number[] = [];
   status: number[] = [];
   errorAt:boolean = false;
+  role2 = '/advisor/';
 
   ngOnInit() {
     for (var i in this.teams) {
@@ -60,7 +61,7 @@ export class AdvisorComponent {
   }
 
   changePass(){
-    this.router.navigate(['change-password', this.phaseName, this.bearer]);
+    this.router.navigate(['change-password', this.role2, this.bearer]);
   }
 
   panelOpened() {

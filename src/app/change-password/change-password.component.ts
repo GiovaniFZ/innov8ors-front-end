@@ -11,13 +11,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './change-password.component.css'
 })
 export class ChangePasswordComponent {
-  constructor(private route: ActivatedRoute, private router: Router, private userDataService: UsersDataService) { }
+  constructor(private route: ActivatedRoute, private location: Location, private userDataService: UsersDataService) { }
   loading: boolean = false;
   loading2: boolean = false;
   errorAt: boolean = false;
   passNotConf:boolean = false;
   bearer = String(this.route.snapshot.paramMap.get('bearer'));
-  phaseName = this.route.snapshot.paramMap.get('phaseName');
+  role = this.route.snapshot.paramMap.get('role2');
   errorMessage: string = '';
   passUpdated: boolean = false;
   passController = new FormControl('', Validators.required);
@@ -48,7 +48,7 @@ export class ChangePasswordComponent {
     this.passUpdated = false;
     this.errorAt = false;
     this.loading = true;
-    this.userDataService.handlePost(this.bearer, '/advisor/change-password', json).subscribe(
+    this.userDataService.handlePost(this.bearer, this.role + 'change-password', json).subscribe(
       (response) => {
         this.passUpdated = true;
         this.loading = false;
@@ -68,21 +68,6 @@ export class ChangePasswordComponent {
   }
 
   goBack() {
-    this.loading2 = true;
-    let teams = [];
-    this.userDataService.handleAdvisor(this.bearer)
-      .subscribe(
-        (response) => {
-          teams = response["teams"];
-          this.userDataService.setTeams(teams);
-          this.loading2 = false;
-          this.router.navigate(['/advisor', this.phaseName, this.bearer]);
-        },
-        (error) => {
-          console.error('Request failed with error')
-          this.errorMessage = error;
-          this.loading2 = false;
-          this.errorAt = true;
-        });
+    this.location.back();
   }
 }
