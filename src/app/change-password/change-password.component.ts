@@ -16,6 +16,7 @@ export class ChangePasswordComponent {
   loading2: boolean = false;
   errorAt: boolean = false;
   passNotConf:boolean = false;
+  passNotAct : boolean = false;
   bearer = String(this.route.snapshot.paramMap.get('bearer'));
   role = this.route.snapshot.paramMap.get('role2');
   errorMessage: string = '';
@@ -32,12 +33,18 @@ export class ChangePasswordComponent {
   newPassConf = '';
 
   verify() {
-    // Verificar se a senha digitada é a mesma da confirmada
-    if (this.newPass === this.newPassConf) {
+    // Verificar se a senha digitada é a mesma da confirmada e se a senha atual coincide com a digitada
+    this.actPass2 = this.userDataService.getPass();
+    if(this.actPass != this.actPass2){
+      this.passNotAct = true;
       this.passNotConf = false;
-      this.changePass();
-    }else{
+    }else if (this.newPass != this.newPassConf) {
+      this.passNotAct = false;
       this.passNotConf = true;
+    }else{
+      this.passNotConf = false;
+      this.passNotAct = false;
+      this.changePass();
     }
   }
 

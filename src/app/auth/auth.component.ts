@@ -30,11 +30,11 @@ export class AuthComponent {
     this.loading = true;
     this.userDataService.tryLogin(this.textoUsuario, this.senhaUsuario).subscribe(
       (response: any) =>{
+        this.userDataService.setPass(this.senhaUsuario);
         this.repos = response;
         this.role = response["User"]["role"];
         this.name = response["User"]["email"];
         this.bearer = response["Bearer"];
-
         this.router.navigate(['/interm-screen', this.bearer, this.name, this.role]);
       },
       (error) => {

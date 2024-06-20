@@ -10,6 +10,7 @@ export class UsersDataService {
   private dataArray: any[];
   private fetinStages: any[];
   dataJson = {};
+  private pass = '';
 
   constructor(private http: HttpClient) {
     this.dataArray = [];
@@ -124,5 +125,14 @@ export class UsersDataService {
 
   getFetinStages(){
     return this.fetinStages;
+  }
+
+  // Métodos utilizados para mudança de senha
+  setPass(pass: string){
+    this.pass = pass;
+  }
+
+  getPass(){
+    return this.pass;
   }
 }
