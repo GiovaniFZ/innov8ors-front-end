@@ -16,7 +16,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 const routes: Routes = [    
     { path: 'auth', component: AuthComponent },
     { path: 'advisor/:phaseName/:bearer', component: AdvisorComponent },
-    { path: 'student/:phaseName/:bearer', component: StudentComponent },
+    { path: 'student/:name/:phaseName/:bearer', component: StudentComponent },
     { path: 'adm-teams/:bearer/:name', component:AdmComponent },
     { path: 'adm-proj-details/:bearer', component:AdmProjDetailsComponent },
     { path: 'create-proj/:bearer', component:ProjCreatorComponent },

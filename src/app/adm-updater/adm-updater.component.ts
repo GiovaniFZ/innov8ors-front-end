@@ -113,7 +113,6 @@ export class AdmUpdaterComponent {
           this.errorAt = false;
           this.loading = false;
         }
-        this.errorAt = true;
         this.loading = false;
         console.log(error);
       });

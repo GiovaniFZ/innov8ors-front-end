@@ -21,6 +21,7 @@ export class StudentComponent {
   teams = this.userDataService.getTeams();
   phaseName = String(this.route.snapshot.paramMap.get('phaseName'));
   bearer = String(this.route.snapshot.paramMap.get('bearer'));
+  email2 = String(this.route.snapshot.paramMap.get('name'));
   role = '[ROLE_MEMBER]';
   role2 = '/member/'
   loading: boolean = false;
@@ -63,7 +64,7 @@ export class StudentComponent {
 
   goBack(){
     this.loading2 = true;
-    this.router.navigate(['interm-screen', this.bearer, this.name, this.role]);
+    this.router.navigate(['interm-screen', this.bearer, this.email2, this.role]);
     this.loading2 = false;
   }
 

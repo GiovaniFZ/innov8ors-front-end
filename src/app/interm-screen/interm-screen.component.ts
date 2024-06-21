@@ -59,7 +59,7 @@ export class IntermScreenComponent {
             teams = response["teams"];
             phaseName = response["fetinPhase"]["phaseName"];
             this.userDataService.setTeams(teams);
-            this.router.navigate(['/student', phaseName, bearer]);
+            this.router.navigate(['/student', this.name, phaseName, bearer]);
           },
           (error) => {                              
             console.error('Request failed with error')
