@@ -56,6 +56,22 @@ expansion ul{
   padding-left: 10px;
 }
 
+.expansion3{
+  font-size: 27px;
+  padding: 55px;
+  padding-top: 20px;
+  text-align: left;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  min-width: 250px;
+  margin-bottom: 4%;
+}
+expansion3 ul{
+  padding-left: 10px;
+}
+
 .expansion2{
   margin-bottom: 4%;
 }

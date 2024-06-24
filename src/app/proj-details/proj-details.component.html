@@ -22,7 +22,7 @@
                         <li>Email: {{ member_emails[i] }}</li>
                     </ul>
                 </mat-expansion-panel>
-                <h1 style="color: black">Notas</h1>
+                <h1 style="color: black; margin-top: 5%;">Notas</h1>
                 <mat-expansion-panel *ngFor="let nota of notas; let i = index" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
